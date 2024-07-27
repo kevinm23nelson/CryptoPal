@@ -7,6 +7,12 @@ const SideBar = () => {
         <div className='app-sidebar'>
             <ul className='sidebar-links'>
                 <Link
+                    to="/"
+                    className="sidebar-button">
+                    Dashboard
+                </Link>
+                <br />
+                <Link
                     to="/explore"
                     className="sidebar-button">
                     Explore
