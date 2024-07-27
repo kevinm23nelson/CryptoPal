@@ -1,8 +1,14 @@
 import React from 'react'
+import Filter from '../Filter/Filter'
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <div className="dashboard">
+      <header className="dashboard-header">
+        <h1>DASHBOARD</h1>
+      </header>
+      <Filter />
+    </div>
   )
 }
 

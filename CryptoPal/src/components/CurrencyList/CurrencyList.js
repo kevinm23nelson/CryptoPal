@@ -2,7 +2,9 @@ import React from 'react'
 
 const CurrencyList = () => {
   return (
-    <div>CurrencyList</div>
+    <div className='currency-list-item'>
+      
+    </div>
   )
 }
 
