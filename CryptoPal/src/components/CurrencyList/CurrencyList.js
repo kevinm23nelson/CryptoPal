@@ -4,7 +4,7 @@ import { loadFavorites, saveFavorites } from '../../LocalStorage';
 import CurrencyCard from '../CurrencyCard/CurrencyCard';
 import './CurrencyList.css';
 
-const CurrencyList = () => {
+const CurrencyList = ({searchQuery}) => {
   const [currencies, setCurrencies] = useState([]);
   const [favorites, setFavorites] = useState([]);
 
