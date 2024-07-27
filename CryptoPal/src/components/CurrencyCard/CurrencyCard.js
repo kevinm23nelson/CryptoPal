@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './CurrencyCard.css';
 
 const CurrencyCard = ({ favorites = [] }) => {
+  const [removeFavorite, setRemoveFavorite] = useState('')
+
+  const handleRemoveFavorite = (event) => {
+    setRemoveFavorite(event)
+  }
   return (
     <div className="currency-card">
       <div className="currency-card-header">
@@ -20,6 +25,9 @@ const CurrencyCard = ({ favorites = [] }) => {
               <p>Change (24hr): {currency.changePercent24Hr}</p>
             </div>
           ))
+          <div className="currency-card-buttons">
+            <button onClick={handleRemoveFavorite}>Remove Favorite</button>
+          </div>
         ) : (
           <p>No favorites selected.</p>
         )}
