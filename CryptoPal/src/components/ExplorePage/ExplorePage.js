@@ -1,5 +1,7 @@
 import React from 'react'
 import SearchBar from '../SearchBar/SearchBar'
+import CurrencyList from '../CurrencyList/CurrencyList'
+import './ExplorePage.css'
 
 const ExplorePage = () => {
   return (
@@ -8,6 +10,8 @@ const ExplorePage = () => {
         <h1>TOP 100 CURRENCIES</h1>
       </header>
       <SearchBar />
+      <br />
+      <CurrencyList />
     </div>
   )
 }
