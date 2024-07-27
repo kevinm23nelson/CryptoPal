@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './SearchBar.css';
 
 const SearchBar = ({ searchQuery, handleSearchChange }) => {
   return (
     <div className="search-bar">
       <input
         type="text"
-        placeholder="Search currencies here..."
         value={searchQuery}
         onChange={(e) => handleSearchChange(e.target.value)}
+        placeholder="Search currencies..."
       />
     </div>
   );
