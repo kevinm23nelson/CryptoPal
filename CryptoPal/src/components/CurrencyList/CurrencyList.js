@@ -18,18 +18,19 @@ const CurrencyList = () => {
   }, []);
 
   useEffect(() => {
-    const savedFavorites = loadFavorites()
-    setFavorites(savedFavorites)
-  })
+    const savedFavorites = loadFavorites();
+    setFavorites(savedFavorites);
+  }, []);
 
   const toggleFavorite = (currency) => {
+    let updatedFavorites;
     if (favorites.find((fav) => fav.id === currency.id)) {
-      setFavorites(favorites.filter((fav) => fav.id !== currency.id));
+      updatedFavorites = favorites.filter((fav) => fav.id !== currency.id);
     } else {
-      setFavorites([...favorites, currency]);
+      updatedFavorites = [...favorites, currency];
     }
-    setFavorites(updatedFavorites)
-    saveFavorites(updatedFavorites)
+    setFavorites(updatedFavorites);
+    saveFavorites(updatedFavorites);
   };
 
   return (

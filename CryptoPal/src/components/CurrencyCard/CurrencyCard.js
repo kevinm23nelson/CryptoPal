@@ -1,6 +1,8 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+import './CurrencyCard.css';
 
-const CurrencyCard = ({ favorites }) => {
+const CurrencyCard = ({ favorites = [] }) => {
   return (
     <div className="currency-card">
       <div className="currency-card-header">
@@ -27,4 +29,23 @@ const CurrencyCard = ({ favorites }) => {
   );
 };
 
-export default CurrencyCard
+CurrencyCard.propTypes = {
+  favorites: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      rank: PropTypes.number.isRequired,
+      symbol: PropTypes.string.isRequired,
+      marketCapUsd: PropTypes.string.isRequired,
+      priceUsd: PropTypes.string.isRequired,
+      changePercent24Hr: PropTypes.string.isRequired,
+      sixMonthChange: PropTypes.string.isRequired,
+    })
+  ),
+};
+
+CurrencyCard.defaultProps = {
+  favorites: [],
+};
+
+export default CurrencyCard;
