@@ -18,7 +18,6 @@ const CurrencyCard = ({ favorites = [] }) => {
               <p>Market Cap USD: {currency.marketCapUsd}</p>
               <p>Price USD: {currency.priceUsd}</p>
               <p>Change (24hr): {currency.changePercent24Hr}</p>
-              <p>Change (6 Months): {currency.sixMonthChange}</p>
             </div>
           ))
         ) : (
@@ -39,7 +38,6 @@ CurrencyCard.propTypes = {
       marketCapUsd: PropTypes.string.isRequired,
       priceUsd: PropTypes.string.isRequired,
       changePercent24Hr: PropTypes.string.isRequired,
-      sixMonthChange: PropTypes.string.isRequired,
     })
   ),
 };
