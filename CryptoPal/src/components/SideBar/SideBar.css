@@ -8,15 +8,15 @@
     background-color: #85bb65; /* Money green color */
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.sidebar-links {
+  }
+  
+  .sidebar-links {
     list-style-type: none;
     padding: 0;
     margin: 0;
-}
-
-.sidebar-button {
+  }
+  
+  .sidebar-button {
     display: block;
     margin: 15px 0;
     padding: 10px 15px;
@@ -28,9 +28,10 @@
     border: none;
     border-radius: 10px; /* Rounded edges */
     transition: background-color 0.3s, transform 0.3s;
-}
-
-.sidebar-button:hover {
+  }
+  
+  .sidebar-button:hover {
     background-color: #73a554; 
     transform: translateX(5px);
-}
+  }
+  

@@ -1,15 +1,14 @@
-import React from 'react'
-import Filter from '../Filter/Filter'
+import React from 'react';
+import './Dashboard.css';
+import Filter from '../Filter/Filter';
 
 const Dashboard = () => {
   return (
     <div className="dashboard">
-      <header className="dashboard-header">
-        <h1>DASHBOARD</h1>
-      </header>
+      <h1>Dashboard</h1>
       <Filter />
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
