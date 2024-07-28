@@ -90,12 +90,11 @@ CurrencyList.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      rank: PropTypes.number.isRequired,
+      rank: PropTypes.string.isRequired,
       symbol: PropTypes.string.isRequired,
       marketCapUsd: PropTypes.string.isRequired,
       priceUsd: PropTypes.string.isRequired,
       changePercent24Hr: PropTypes.string.isRequired,
-      sixMonthChange: PropTypes.string.isRequired,
     })
   ).isRequired,
   toggleFavorite: PropTypes.func.isRequired,

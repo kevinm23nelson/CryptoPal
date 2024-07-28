@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import './CurrencyCard.css';
 
 const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
-  const [removingId, setRemovingId] = useState(null);
+  const navigate = useNavigate();
 
   const handleRemoveFavorite = (currencyId) => {
-    setRemovingId(currencyId);
-    setTimeout(() => {
-      onRemoveFavorite(currencyId);
-      setRemovingId(null);
-    }, 300); // Match this duration to the CSS transition duration
+    onRemoveFavorite(currencyId);
+  };
+
+  const handleViewDetails = (currencyId) => {
+    navigate(`/currency/${currencyId}`, { state: { from: 'dashboard' } });
   };
 
   const formatPrice = (price) => {
@@ -30,10 +31,7 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
       <div className="currency-card-body">
         {favorites.length > 0 ? (
           favorites.map((currency) => (
-            <div
-              key={currency.id}
-              className={`currency-item ${removingId === currency.id ? 'removing' : ''}`}
-            >
+            <div key={currency.id} className="currency-item">
               <p>Name: {currency.name}</p>
               <p>Rank: {currency.rank}</p>
               <p>Symbol: {currency.symbol}</p>
@@ -45,6 +43,12 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
                 className="remove-favorite-button"
               >
                 Remove Favorite
+              </button>
+              <button
+                onClick={() => handleViewDetails(currency.id)}
+                className="dashboard-view-details-button"
+              >
+                View Details
               </button>
             </div>
           ))
@@ -61,7 +65,7 @@ CurrencyCard.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      rank: PropTypes.number.isRequired,
+      rank: PropTypes.string.isRequired,
       symbol: PropTypes.string.isRequired,
       marketCapUsd: PropTypes.string.isRequired,
       priceUsd: PropTypes.string.isRequired,

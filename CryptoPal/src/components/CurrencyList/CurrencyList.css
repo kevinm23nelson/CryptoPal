@@ -19,6 +19,11 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.button-container {
+  display: flex;
+  gap: 10px; /* Adjust the spacing as needed */
+}
+
 .favorite-button {
   background-color: #ffddc1;
   border: none;
@@ -36,6 +41,20 @@
 
 .favorite-button:hover {
   background-color: #f0a4a4;
+}
+
+.view-details-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.view-details-button:hover {
+  background-color: #0056b3;
 }
 
 .error-message {

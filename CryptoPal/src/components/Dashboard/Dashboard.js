@@ -1,40 +1,51 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { loadFavorites, saveFavorites } from '../../LocalStorage';
 import CurrencyCard from '../CurrencyCard/CurrencyCard';
 import Filter from '../Filter/Filter';
-import { getCurrencyById } from '../../api/apiCalls'; // Ensure this function is implemented correctly
+import { getCurrencyById } from '../../api/apiCalls';
 import './Dashboard.css';
 
 const Dashboard = () => {
   const [favorites, setFavorites] = useState([]);
   const [filter, setFilter] = useState('rank');
+  const prevFavoritesLength = useRef(favorites.length);
 
   useEffect(() => {
     const savedFavorites = loadFavorites();
     setFavorites(savedFavorites);
   }, []);
 
-  useEffect(() => {
-    const updateFavoritesData = async () => {
-      const updatedFavorites = await Promise.all(
-        favorites.map(async (fav) => {
-          try {
-            const updatedCurrency = await getCurrencyById(fav.id);
-            return { ...fav, ...updatedCurrency };
-          } catch (error) {
-            console.error(`Error fetching data for ${fav.id}:`, error);
-            return fav;
-          }
-        })
-      );
-      setFavorites(updatedFavorites);
-    };
-
-    // Initial fetch for updated data
-    if (favorites.length > 0) {
-      updateFavoritesData();
-    }
+  const updateFavoritesData = useCallback(async () => {
+    const updatedFavorites = await Promise.all(
+      favorites.map(async (fav) => {
+        try {
+          const updatedCurrency = await getCurrencyById(fav.id);
+          return { ...fav, ...updatedCurrency };
+        } catch (error) {
+          console.error(`Error fetching data for ${fav.id}:`, error);
+          return fav;
+        }
+      })
+    );
+    setFavorites(updatedFavorites);
   }, [favorites]);
+
+  useEffect(() => {
+    if (favorites.length !== prevFavoritesLength.current) {
+      prevFavoritesLength.current = favorites.length;
+      if (favorites.length > 0) {
+        updateFavoritesData();
+      }
+    }
+  }, [favorites, updateFavoritesData]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      updateFavoritesData();
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, [updateFavoritesData]);
 
   const removeFavorite = (currencyId) => {
     const updatedFavorites = favorites.filter((fav) => fav.id !== currencyId);
@@ -49,9 +60,13 @@ const Dashboard = () => {
   const getFilteredFavorites = () => {
     switch (filter) {
       case '24hrpositive':
-        return [...favorites].sort((a, b) => parseFloat(b.changePercent24Hr) - parseFloat(a.changePercent24Hr));
+        return [...favorites].sort(
+          (a, b) => parseFloat(b.changePercent24Hr) - parseFloat(a.changePercent24Hr)
+        );
       case '24hrnegative':
-        return [...favorites].sort((a, b) => parseFloat(a.changePercent24Hr) - parseFloat(b.changePercent24Hr));
+        return [...favorites].sort(
+          (a, b) => parseFloat(a.changePercent24Hr) - parseFloat(b.changePercent24Hr)
+        );
       case 'rank':
       default:
         return [...favorites].sort((a, b) => a.rank - b.rank);
@@ -70,3 +85,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
