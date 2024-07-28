@@ -45,8 +45,7 @@ const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
             <p>Symbol: {currency.symbol}</p>
             <p>Market Cap USD: {currency.marketCapUsd}</p>
             <p>Price USD: {currency.priceUsd}</p>
-            <p>Change (24hr): {currency.changePercent24Hr}</p>
-            <p>Change (6 Months): {currency.sixMonthChange}</p>
+            <p>Change (24hr): {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
             <button
               className={`favorite-button ${
                 favorites.find((fav) => fav.id === currency.id) ? 'favorited' : ''

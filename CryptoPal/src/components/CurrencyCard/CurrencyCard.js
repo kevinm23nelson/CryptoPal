@@ -30,17 +30,17 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
               <p>Symbol: {currency.symbol}</p>
               <p>Market Cap USD: {currency.marketCapUsd}</p>
               <p>Price USD: {currency.priceUsd}</p>
-              <p>Change (24hr): {currency.changePercent24Hr}</p>
+              <p>Change (24hr): {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
               <button
                 onClick={() => handleRemoveFavorite(currency.id)}
                 className="remove-favorite-button"
               >
-                Remove Favorite
+                Remove Favorite2
               </button>
             </div>
           ))
         ) : (
-          <p>No favorites selected.</p>
+          <p>No favorites selected. Go to the "Explore" page!</p>
         )}
       </div>
     </div>
