@@ -23,15 +23,15 @@ const Dashboard = () => {
     setFilter(filter)
   }
 
-  const getFiltertedFavorites = () => {
+ const getFiltertedFavorites = () => {
     switch (filter) {
       case '24hrpositive':
         return [...favorites].sort((a, b) => parseFloat(b.changePercent24Hr) - parseFloat(a.changePercent24Hr))
-      case '24hrnegavtive':
+      case '24hrnegative':
         return [...favorites].sort((a, b) => parseFloat(a.changePercent24Hr) - parseFloat(b.changePercent24Hr))
       case 'rank':
-      default:
-        return [...favorites].sort((a, b) => a.rank - b.rank)
+        default:
+          return [...favorites].sort((a, b) => a.rank - b.rank)
     }
   }
   return (

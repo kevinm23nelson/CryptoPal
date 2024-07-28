@@ -35,7 +35,7 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
                 onClick={() => handleRemoveFavorite(currency.id)}
                 className="remove-favorite-button"
               >
-                Remove Favorite2
+                Remove Favorite
               </button>
             </div>
           ))
