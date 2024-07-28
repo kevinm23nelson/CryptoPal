@@ -33,6 +33,15 @@ const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
     }
   }, [searchQuery, filteredCurrencies]);
 
+  const formatPrice = (price) => {
+    return parseFloat(price).toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
   return (
     <div className="currency-list">
       {errorMessage ? (
@@ -43,8 +52,8 @@ const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
             <p>Name: {currency.name}</p>
             <p>Rank: {currency.rank}</p>
             <p>Symbol: {currency.symbol}</p>
-            <p>Market Cap USD: {currency.marketCapUsd}</p>
-            <p>Price USD: {currency.priceUsd}</p>
+            <p>Market Cap USD: {formatPrice(currency.marketCapUsd)}</p>
+            <p>Price USD: {formatPrice(currency.priceUsd)}</p>
             <p>Change (24hr): {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
             <button
               className={`favorite-button ${

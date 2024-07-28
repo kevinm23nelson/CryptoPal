@@ -13,6 +13,15 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
     }, 300); // Match this duration to the CSS transition duration
   };
 
+  const formatPrice = (price) => {
+    return parseFloat(price).toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
   return (
     <div className="currency-card">
       <div className="currency-card-header">
@@ -28,8 +37,8 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
               <p>Name: {currency.name}</p>
               <p>Rank: {currency.rank}</p>
               <p>Symbol: {currency.symbol}</p>
-              <p>Market Cap USD: {currency.marketCapUsd}</p>
-              <p>Price USD: {currency.priceUsd}</p>
+              <p>Market Cap USD: {formatPrice(currency.marketCapUsd)}</p>
+              <p>Price USD: {formatPrice(currency.priceUsd)}</p>
               <p>Change (24hr): {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
               <button
                 onClick={() => handleRemoveFavorite(currency.id)}
