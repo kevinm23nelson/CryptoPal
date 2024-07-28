@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import { getCurrencies } from '../../api/apiCalls';
 import './CurrencyList.css';
 
 const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
   const [currencies, setCurrencies] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,6 +44,10 @@ const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
     });
   };
 
+  const handleViewDetails = (id) => {
+    navigate(`/currency/${id}`);
+  };
+
   return (
     <div className="currency-list">
       {errorMessage ? (
@@ -55,14 +61,22 @@ const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
             <p>Market Cap USD: {formatPrice(currency.marketCapUsd)}</p>
             <p>Price USD: {formatPrice(currency.priceUsd)}</p>
             <p>Change (24hr): {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
-            <button
-              className={`favorite-button ${
-                favorites.find((fav) => fav.id === currency.id) ? 'favorited' : ''
-              }`}
-              onClick={() => toggleFavorite(currency)}
-            >
-              {favorites.find((fav) => fav.id === currency.id) ? 'Unfavorite' : 'Favorite'}
-            </button>
+            <div className="button-container">
+              <button
+                className={`favorite-button ${
+                  favorites.find((fav) => fav.id === currency.id) ? 'favorited' : ''
+                }`}
+                onClick={() => toggleFavorite(currency)}
+              >
+                {favorites.find((fav) => fav.id === currency.id) ? 'Unfavorite' : 'Favorite'}
+              </button>
+              <button
+                className="view-details-button"
+                onClick={() => handleViewDetails(currency.id)}
+              >
+                View Details
+              </button>
+            </div>
           </div>
         ))
       )}
