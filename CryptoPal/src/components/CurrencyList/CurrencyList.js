@@ -62,10 +62,10 @@ const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
           >
             <div className="currency-header">
               <p>{currency.name}</p>
+              <p>Symbol: {currency.symbol}</p>
             </div>
             <div className="explore-currency-details">
               <p>Rank: {currency.rank}</p>
-              <p>Symbol: {currency.symbol}</p>
               <p>Price: {formatPrice(currency.priceUsd)}</p>
               <p>Change (24hr): {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
             </div>

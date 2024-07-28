@@ -38,11 +38,11 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
               }`}
             >
               <div className="currency-header">
-                <p>{currency.name}</p>
+                <p>Coin: {currency.name}</p>
+                <p> Symbol: {currency.symbol}</p>
               </div>
               <div className="currency-details">
                 <p>Rank: {currency.rank}</p>
-                <p>Symbol: {currency.symbol}</p>
                 <p>Market Cap USD: {formatPrice(currency.marketCapUsd)}</p>
                 <p>Price USD: {formatPrice(currency.priceUsd)}</p>
                 <p>Change (24hr): {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
