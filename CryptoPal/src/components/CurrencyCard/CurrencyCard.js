@@ -31,25 +31,36 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
       <div className="currency-card-body">
         {favorites.length > 0 ? (
           favorites.map((currency) => (
-            <div key={currency.id} className="currency-item">
-              <p>Name: {currency.name}</p>
-              <p>Rank: {currency.rank}</p>
-              <p>Symbol: {currency.symbol}</p>
-              <p>Market Cap USD: {formatPrice(currency.marketCapUsd)}</p>
-              <p>Price USD: {formatPrice(currency.priceUsd)}</p>
-              <p>Change (24hr): {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
-              <button
-                onClick={() => handleRemoveFavorite(currency.id)}
-                className="remove-favorite-button"
-              >
-                Remove Favorite
-              </button>
-              <button
-                onClick={() => handleViewDetails(currency.id)}
-                className="dashboard-view-details-button"
-              >
-                View Details
-              </button>
+            <div
+              key={currency.id}
+              className={`currency-item ${
+                parseFloat(currency.changePercent24Hr) >= 0 ? 'positive' : 'negative'
+              }`}
+            >
+              <div className="currency-header">
+                <p>{currency.name}</p>
+              </div>
+              <div className="currency-details">
+                <p>Rank: {currency.rank}</p>
+                <p>Symbol: {currency.symbol}</p>
+                <p>Market Cap USD: {formatPrice(currency.marketCapUsd)}</p>
+                <p>Price USD: {formatPrice(currency.priceUsd)}</p>
+                <p>Change (24hr): {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
+              </div>
+              <div className="button-container">
+                <button
+                  onClick={() => handleRemoveFavorite(currency.id)}
+                  className="favorite-button"
+                >
+                  Remove Favorite
+                </button>
+                <button
+                  onClick={() => handleViewDetails(currency.id)}
+                  className="dashboard-view-details-button"
+                >
+                  View Details
+                </button>
+              </div>
             </div>
           ))
         ) : (

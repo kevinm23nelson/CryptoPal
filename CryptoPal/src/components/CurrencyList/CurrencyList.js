@@ -54,13 +54,21 @@ const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
         <p className="error-message">{errorMessage}</p>
       ) : (
         filteredCurrencies.map((currency) => (
-          <div key={currency.id} className="currency-list-item">
-            <p>Name: {currency.name}</p>
-            <p>Rank: {currency.rank}</p>
-            <p>Symbol: {currency.symbol}</p>
-            <p>Market Cap USD: {formatPrice(currency.marketCapUsd)}</p>
-            <p>Price USD: {formatPrice(currency.priceUsd)}</p>
-            <p>Change (24hr): {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
+          <div
+            key={currency.id}
+            className={`currency-list-item ${
+              parseFloat(currency.changePercent24Hr) >= 0 ? 'positive' : 'negative'
+            }`}
+          >
+            <div className="currency-header">
+              <p>{currency.name}</p>
+            </div>
+            <div className="explore-currency-details">
+              <p>Rank: {currency.rank}</p>
+              <p>Symbol: {currency.symbol}</p>
+              <p>Price: {formatPrice(currency.priceUsd)}</p>
+              <p>Change (24hr): {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
+            </div>
             <div className="button-container">
               <button
                 className={`favorite-button ${
@@ -89,12 +97,6 @@ CurrencyList.propTypes = {
   favorites: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      rank: PropTypes.string.isRequired,
-      symbol: PropTypes.string.isRequired,
-      marketCapUsd: PropTypes.string.isRequired,
-      priceUsd: PropTypes.string.isRequired,
-      changePercent24Hr: PropTypes.string.isRequired,
     })
   ).isRequired,
   toggleFavorite: PropTypes.func.isRequired,

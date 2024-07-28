@@ -1,6 +1,4 @@
-/* src/components/CurrencyList/CurrencyList.css */
-
-.currency-list-items {
+.currency-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -8,15 +6,28 @@
 
 .currency-list-item {
   border: 1px solid #ddd;
-  padding: 15px;
+  padding: 10px;
   border-radius: 5px;
   background-color: #f9f9f9;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .currency-list-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.currency-header {
+  background-color: #eee;
+  padding: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.explore-currency-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
 }
 
 .button-container {
@@ -27,7 +38,7 @@
 .favorite-button {
   background-color: #ffddc1;
   border: none;
-  padding: 10px;
+  padding: 5px;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
@@ -47,7 +58,7 @@
   background-color: #007bff;
   color: white;
   border: none;
-  padding: 8px 16px;
+  padding: 5px 10px;
   cursor: pointer;
   border-radius: 4px;
   font-weight: bold;
@@ -62,4 +73,12 @@
   font-size: 1.2em;
   text-align: center;
   width: 100%;
+}
+
+.currency-list-item.positive .currency-header {
+  background-color: #85bb65; /* Positive change color */
+}
+
+.currency-list-item.negative .currency-header {
+  background-color: #f76c6c; /* Negative change color */
 }

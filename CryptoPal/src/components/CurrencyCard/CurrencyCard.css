@@ -4,24 +4,22 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
-}
-
-
-.currency-card-header {
+  }
+  
+  .currency-card-header {
     font-size: 1.5em;
     margin-bottom: 20px;
     text-align: center;
-}
-
-
-.currency-card-body {
+  }
+  
+  .currency-card-body {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-}
-
-.currency-item {
+  }
+  
+  .currency-item {
     flex: 1 1 300px;
     padding: 15px;
     border: 1px solid #ddd;
@@ -34,34 +32,55 @@
     transition: all 0.3s ease-in-out;
     opacity: 1;
     transform: translateY(0);
-}
-
-.currency-item:hover {
+  }
+  
+  .currency-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.currency-item.removing {
+  }
+  
+  .currency-item.removing {
     opacity: 0;
     transition: opacity 0.3s ease-out;
   }
-
-.remove-favorite-button {
+  
+  .currency-header {
+    background-color: #eee;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  .currency-details {
+    justify-content: space-between;
+    padding: 5px 0;
+  }
+  
+  .button-container {
+    display: flex;
+    gap: 10px; /* Adjust the spacing as needed */
+  }
+  
+  .favorite-button {
     background-color: #ffddc1;
     border: none;
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s;
-}
-
-.remove-favorite-button:hover {
-    background-color: #f0a4a4;
+  }
+  
+  .favorite-button.favorited {
+    background-color: #f76c6c;
     color: white;
-}
-
-.dashboard-view-details-button {
+  }
+  
+  .favorite-button:hover {
+    background-color: #f0a4a4;
+  }
+  
+  .dashboard-view-details-button {
     background-color: #007bff;
     border-radius: 4px;
     color: white;
@@ -78,16 +97,26 @@
     background-color: #6ca4f7;
     color: white;
   }
-
-/* Responsive design */
-@media (max-width: 1200px) {
+  
+  /* Positive and negative change colors for the header */
+  .currency-item.positive .currency-header {
+    background-color: #85bb65; /* Positive change color */
+  }
+  
+  .currency-item.negative .currency-header {
+    background-color: #f76c6c; /* Negative change color */
+  }
+  
+  /* Responsive design */
+  @media (max-width: 1200px) {
     .currency-item {
-        max-width: 250px;
+      max-width: 250px;
     }
-}
-
-@media (max-width: 768px) {
+  }
+  
+  @media (max-width: 768px) {
     .currency-item {
-        max-width: 100%;
+      max-width: 100%;
     }
-}
+  }
+  
