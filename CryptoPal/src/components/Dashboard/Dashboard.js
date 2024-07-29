@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { loadFavorites, saveFavorites } from '../../LocalStorage';
-import CurrencyCard from '../CurrencyCard/CurrencyCard';
+import CurrencyCard, { calculateSixMonthPerformance } from '../CurrencyCard/CurrencyCard';
 import Filter from '../Filter/Filter';
-import { getCurrencyById } from '../../api/apiCalls';
+import { getCurrencyById, getHistoricalData } from '../../api/apiCalls';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -20,7 +20,9 @@ const Dashboard = () => {
       favorites.map(async (fav) => {
         try {
           const updatedCurrency = await getCurrencyById(fav.id);
-          return { ...fav, ...updatedCurrency };
+          const historicalData = await getHistoricalData(fav.id);
+          const sixMonthPerformance = calculateSixMonthPerformance(historicalData);
+          return { ...fav, ...updatedCurrency, sixMonthPerformance };
         } catch (error) {
           console.error(`Error fetching data for ${fav.id}:`, error);
           return fav;
@@ -67,6 +69,10 @@ const Dashboard = () => {
         return [...favorites].sort(
           (a, b) => parseFloat(a.changePercent24Hr) - parseFloat(b.changePercent24Hr)
         );
+      case '6month':
+        return [...favorites].sort(
+          (a, b) => parseFloat(b.sixMonthPerformance.percentageChange) - parseFloat(a.sixMonthPerformance.percentageChange)
+        );
       case 'rank':
       default:
         return [...favorites].sort((a, b) => a.rank - b.rank);
@@ -85,4 +91,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
