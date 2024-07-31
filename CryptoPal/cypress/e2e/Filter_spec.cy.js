@@ -105,33 +105,41 @@ describe('Dashboard with Favorites', () => {
 
   it('should filter by 24hr positive change', () => {
     cy.get('.filter-select').select('Change Up (24hr +)');
-    cy.get('.currency-card').eq(0).should('contain.text', 'TRON');
-    cy.get('.currency-card').eq(1).should('contain.text', 'Ethereum');
-    cy.get('.currency-card').eq(2).should('contain.text', 'Bitcoin');
-    cy.get('.currency-card').eq(3).should('contain.text', 'Bibox Token');
+    cy.get('.currency-card').find('.currency-item').should('have.length', 4).then(($cards) => {
+      expect($cards.eq(0)).to.contain.text('TRON');
+      expect($cards.eq(1)).to.contain.text('Ethereum');
+      expect($cards.eq(2)).to.contain.text('Bitcoin');
+      expect($cards.eq(3)).to.contain.text('Bibox Token');
+    });
   });
 
   it('should filter by 24hr negative change', () => {
     cy.get('.filter-select').select('Change Down (24hr -)');
-    cy.get('.currency-card').eq(0).should('contain.text', 'Bibox Token');
-    cy.get('.currency-card').eq(1).should('contain.text', 'Bitcoin');
-    cy.get('.currency-card').eq(2).should('contain.text', 'Ethereum');
-    cy.get('.currency-card').eq(3).should('contain.text', 'TRON');
+    cy.get('.currency-card').find('.currency-item').should('have.length', 4).then(($cards) => {
+      expect($cards.eq(0)).to.contain.text('Bibox Token');
+      expect($cards.eq(1)).to.contain.text('Bitcoin');
+      expect($cards.eq(2)).to.contain.text('Ethereum');
+      expect($cards.eq(3)).to.contain.text('TRON');
+    });
   });
 
   it('should filter by 1 year change', () => {
     cy.get('.filter-select').select('Change (1 Year)');
-    cy.get('.currency-card').eq(0).should('contain.text', 'Bitcoin');
-    cy.get('.currency-card').eq(1).should('contain.text', 'Ethereum');
-    cy.get('.currency-card').eq(2).should('contain.text', 'TRON');
-    cy.get('.currency-card').eq(3).should('contain.text', 'Bibox Token');
+    cy.get('.currency-card').find('.currency-item').should('have.length', 4).then(($cards) => {
+      expect($cards.eq(0)).to.contain.text('Bitcoin');
+      expect($cards.eq(1)).to.contain.text('Ethereum');
+      expect($cards.eq(2)).to.contain.text('TRON');
+      expect($cards.eq(3)).to.contain.text('Bibox Token');
+    });
   });
 
   it('should filter by rank/market cap (default)', () => {
     cy.get('.filter-select').select('Default (Rank/MarketCap)');
-    cy.get('.currency-card').eq(0).should('contain.text', 'Bitcoin');
-    cy.get('.currency-card').eq(1).should('contain.text', 'Ethereum');
-    cy.get('.currency-card').eq(2).should('contain.text', 'TRON');
-    cy.get('.currency-card').eq(3).should('contain.text', 'Bibox Token');
+    cy.get('.currency-card').find('.currency-item').should('have.length', 4).then(($cards) => {
+      expect($cards.eq(0)).to.contain.text('Bitcoin');
+      expect($cards.eq(1)).to.contain.text('Ethereum');
+      expect($cards.eq(2)).to.contain.text('TRON');
+      expect($cards.eq(3)).to.contain.text('Bibox Token');
+    });
   });
 });
