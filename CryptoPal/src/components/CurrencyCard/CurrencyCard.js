@@ -5,22 +5,36 @@ import { getHistoricalData } from '../../api/apiCalls';
 import './CurrencyCard.css';
 
 export const calculateOneYearPerformance = (historicalData) => {
-  if (historicalData.length === 0) return { percentageChange: 0 };
+  console.log('Calculating one year performance for historical data:', historicalData);
+
+  if (historicalData.length === 0) {
+    console.log('No historical data available.');
+    return { percentageChange: 0 };
+  }
 
   const oneYearAgo = new Date();
   oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+  console.log('One year ago date:', oneYearAgo);
 
   const recentData = historicalData.filter(dataPoint => new Date(dataPoint.time) >= oneYearAgo);
+  console.log('Filtered recent data:', recentData);
 
   if (recentData.length < 2) {
+    console.log('Not enough data points for one year performance calculation.');
     return { percentageChange: 0 };
   }
 
   const earliestData = recentData[0];
   const latestData = recentData[recentData.length - 1];
+  console.log('Earliest data point:', earliestData);
+  console.log('Latest data point:', latestData);
+
   const percentageChange = ((latestData.priceUsd - earliestData.priceUsd) / earliestData.priceUsd) * 100;
-  return { percentageChange: percentageChange.toFixed(2)};
+  console.log('Calculated percentage change:', percentageChange.toFixed(2));
+
+  return { percentageChange: percentageChange.toFixed(2) };
 };
+
 const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
   const navigate = useNavigate();
   const [oneYearChanges, setOneYearChanges] = useState({});
@@ -41,6 +55,7 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
           changes[id] = oneYearPerformance.percentageChange;
         });
         setOneYearChanges(changes);
+        console.log('One year changes:', changes);
       } catch (error) {
         console.error('Error fetching historical data:', error);
       }
@@ -82,14 +97,14 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
             >
               <div className="currency-header">
                 <p>Coin: {currency.name}</p>
-                <p>Symbol: {currency.symbol}</p>
+                <p className="currency-symbol">Symbol: {currency.symbol}</p>
               </div>
               <div className="currency-details">
-                <p>Rank: {currency.rank}</p>
-                <p>Market Cap USD: {formatPrice(currency.marketCapUsd)}</p>
-                <p>Price USD: {formatPrice(currency.priceUsd)}</p>
-                <p>Change (24hr): {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
-                <p>Change (1 year): {oneYearChanges[currency.id] || 'Loading...'}%</p>
+                <p className="currency-rank">Rank: {currency.rank}</p>
+                <p className="currency-market-cap">Market Cap: {formatPrice(currency.marketCapUsd)}</p>
+                <p className="currency-price">Price: {formatPrice(currency.priceUsd)}</p>
+                <p className="currency-change">Change (24hr): {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
+                <p className="currency-year-change">Change (1 year): {oneYearChanges[currency.id] || 'Loading...'}%</p>
               </div>
               <div className="button-container">
                 <button

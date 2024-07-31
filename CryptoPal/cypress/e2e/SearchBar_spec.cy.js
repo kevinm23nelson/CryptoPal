@@ -5,16 +5,15 @@ describe('SearchBar', () => {
     cy.visit('http://localhost:3000/explore');
   });
   it('search bar should be able to search', () => {
-    cy.get('.search-bar input').type('green');
+    cy.get('.search-bar input').type('tron');
 
     cy.get('.currency-list').within(() => {
-      cy.contains('.currency-list-item', 'Green Token').should('exist');
-
+      cy.contains('.currency-list-item', 'Tron').should('exist');
       cy.contains('.currency-list-item', 'Bitcoin').should('not.exist');
       cy.contains('.currency-list-item', 'Ethereum').should('not.exist');
       cy.contains('.currency-list-item', 'Bibox Token').should('not.exist');
     });
-
+    
     cy.get('.search-bar input').clear().type('nonexistent');
 
     cy.get('.currency-list').within(() => {

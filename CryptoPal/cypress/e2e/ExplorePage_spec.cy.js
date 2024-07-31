@@ -38,12 +38,12 @@ describe('ExplorePage', () => {
       cy.contains('.currency-list-item', 'Favorite').should('exist'); 
       cy.contains('.currency-list-item', 'View Details').should('exist'); 
 
-      // Green Token
-      cy.contains('.currency-list-item', 'Green Token').should('exist');
-      cy.contains('.currency-list-item', 'Symbol: GRN').should('exist');
+      // TRON
+      cy.contains('.currency-list-item', 'TRON').should('exist');
+      cy.contains('.currency-list-item', 'Symbol: TRX').should('exist');
       cy.contains('.currency-list-item', 'Rank: 10').should('exist');
       cy.contains('.currency-list-item', 'Price: $117.05').should('exist');
-      cy.contains('.currency-list-item', 'Change (24hr): 5.03%').should('exist');
+      cy.contains('.currency-list-item', 'Change (24hr): 5.04%').should('exist');
       cy.contains('.currency-list-item', 'Favorite').should('exist');
       cy.contains('.currency-list-item', 'View Details').should('exist'); 
     });
@@ -51,18 +51,17 @@ describe('ExplorePage', () => {
 
   it('should toggle Favorite and Unfavorite buttons correctly', () => {
     cy.get('.currency-list').within(() => {
-     
-      cy.contains('.currency-list-item', 'Green Token')
+      cy.contains('.currency-list-item', 'TRON')
         .find('.favorite-button') 
         .should('contain.text', 'Favorite') 
         .click(); 
         
-      cy.contains('.currency-list-item', 'Green Token')
+      cy.contains('.currency-list-item', 'TRON')
         .find('.favorite-button')
         .should('contain.text', 'Unfavorite')
         .click();
 
-      cy.contains('.currency-list-item', 'Green Token')
+      cy.contains('.currency-list-item', 'TRON')
         .find('.favorite-button')
         .should('contain.text', 'Favorite');
     });
@@ -70,7 +69,7 @@ describe('ExplorePage', () => {
 
   it('should apply correct CSS classes based on 24hr change percentage', () => {
     cy.get('.currency-list').within(() => {
-      cy.contains('.currency-list-item', 'Green Token')
+      cy.contains('.currency-list-item', 'TRON')
         .should('have.class', 'positive'); 
 
       cy.contains('.currency-list-item', 'Bitcoin')

@@ -11,6 +11,8 @@ const Dashboard = () => {
 
   const fetchFavoritesData = async () => {
     const savedFavorites = loadFavorites();
+    console.log('Loaded favorites from local storage:', savedFavorites);
+
     if (savedFavorites.length === 0) {
       setFavorites([]);
       return;
@@ -21,11 +23,13 @@ const Dashboard = () => {
         savedFavorites.map(async (fav) => {
           const updatedCurrency = await getCurrencyById(fav.id);
           const historicalData = await getHistoricalData(fav.id);
-          const oneYearPerformance = calculateOneYearPerformance(historicalData); // Updated to one year
-          return { ...fav, ...updatedCurrency, oneYearPerformance }; // Updated to one year
+          const oneYearPerformance = calculateOneYearPerformance(historicalData);
+          console.log(`One year performance for ${fav.id}:`, oneYearPerformance);
+          return { ...fav, ...updatedCurrency, oneYearPerformance };
         })
       );
       setFavorites(updatedFavorites);
+      console.log('Updated favorites:', updatedFavorites);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -37,7 +41,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      fetchFavoritesData(); // Call the fetch function within the interval
+      console.log('Fetching data at interval');
+      fetchFavoritesData();
     }, 10000);
 
     return () => clearInterval(interval);
@@ -47,6 +52,7 @@ const Dashboard = () => {
     const updatedFavorites = favorites.filter((fav) => fav.id !== currencyId);
     setFavorites(updatedFavorites);
     saveFavorites(updatedFavorites);
+    console.log(`Removed favorite with ID: ${currencyId}`);
   };
 
   const handleFilterChange = (filter) => {
@@ -54,23 +60,27 @@ const Dashboard = () => {
   };
 
   const getFilteredFavorites = () => {
+    const sortedFavorites = [...favorites];
+    console.log('Sorting favorites with filter:', filter);
+
     switch (filter) {
       case '24hrpositive':
-        return [...favorites].sort(
-          (a, b) => parseFloat(b.changePercent24Hr) - parseFloat(a.changePercent24Hr)
-        );
+        sortedFavorites.sort((a, b) => parseFloat(b.changePercent24Hr) - parseFloat(a.changePercent24Hr));
+        break;
       case '24hrnegative':
-        return [...favorites].sort(
-          (a, b) => parseFloat(a.changePercent24Hr) - parseFloat(b.changePercent24Hr)
-        );
-      case '1year': // Updated to 1 year
-        return [...favorites].sort(
-          (a, b) => parseFloat(b.oneYearPerformance.percentageChange) - parseFloat(a.oneYearPerformance.percentageChange) // Updated to 1 year
-        );
+        sortedFavorites.sort((a, b) => parseFloat(a.changePercent24Hr) - parseFloat(b.changePercent24Hr));
+        break;
+      case '1year':
+        sortedFavorites.sort((a, b) => parseFloat(b.oneYearPerformance.percentageChange) - parseFloat(a.oneYearPerformance.percentageChange));
+        break;
       case 'rank':
       default:
-        return [...favorites].sort((a, b) => a.rank - b.rank);
+        sortedFavorites.sort((a, b) => a.rank - b.rank);
+        break;
     }
+
+    console.log('Filtered favorites:', sortedFavorites);
+    return sortedFavorites;
   };
 
   return (
