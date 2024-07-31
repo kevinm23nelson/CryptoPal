@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './CurrencyCard.css';
 
-const CurrencyCard = ({ favorites = [] }) => {
+const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
+  const [removingId, setRemovingId] = useState(null);
+
+  const handleRemoveFavorite = (currencyId) => {
+    setRemovingId(currencyId);
+    setTimeout(() => {
+      onRemoveFavorite(currencyId);
+      setRemovingId(null);
+    }, 300); // Match this duration to the CSS transition duration
+  };
+
   return (
     <div className="currency-card">
       <div className="currency-card-header">
@@ -11,13 +21,22 @@ const CurrencyCard = ({ favorites = [] }) => {
       <div className="currency-card-body">
         {favorites.length > 0 ? (
           favorites.map((currency) => (
-            <div key={currency.id} className="currency-item">
+            <div
+              key={currency.id}
+              className={`currency-item ${removingId === currency.id ? 'removing' : ''}`}
+            >
               <p>Name: {currency.name}</p>
               <p>Rank: {currency.rank}</p>
               <p>Symbol: {currency.symbol}</p>
               <p>Market Cap USD: {currency.marketCapUsd}</p>
               <p>Price USD: {currency.priceUsd}</p>
               <p>Change (24hr): {currency.changePercent24Hr}</p>
+              <button
+                onClick={() => handleRemoveFavorite(currency.id)}
+                className="remove-favorite-button"
+              >
+                Remove Favorite
+              </button>
             </div>
           ))
         ) : (
@@ -40,6 +59,7 @@ CurrencyCard.propTypes = {
       changePercent24Hr: PropTypes.string.isRequired,
     })
   ),
+  onRemoveFavorite: PropTypes.func.isRequired,
 };
 
 CurrencyCard.defaultProps = {
