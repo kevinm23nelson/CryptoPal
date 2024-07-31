@@ -1,25 +1,19 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('setupCurrencyIntercepts', () => {
+    console.log('Setting up intercepts');
+    
+    cy.intercept('GET', 'https://api.coincap.io/v2/assets', {
+      statusCode: 200,
+      fixture: 'DashboardCurrencies.json'
+    }).as('getCurrencies');
+  
+    cy.intercept('GET', 'https://api.coincap.io/v2/assets/*', (req) => {
+      const id = req.url.split('/').pop();
+      req.reply({ statusCode: 200, fixture: `CurrencyDetails_${id}.json` });
+    }).as('getCurrencyById');
+  
+    cy.intercept('GET', 'https://api.coincap.io/v2/assets/*/history?interval=d1', (req) => {
+      const id = req.url.split('/')[4];
+      req.reply({ statusCode: 200, fixture: `HistoricalData_${id}.json` });
+    }).as('getHistoricalData');
+  });
+  

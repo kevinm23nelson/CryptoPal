@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { loadFavorites, saveFavorites } from '../../LocalStorage';
-import CurrencyCard, { calculateSixMonthPerformance } from '../CurrencyCard/CurrencyCard';
+import CurrencyCard, { calculateOneYearPerformance } from '../CurrencyCard/CurrencyCard';
 import Filter from '../Filter/Filter';
 import { getCurrencyById, getHistoricalData } from '../../api/apiCalls';
 import './Dashboard.css';
@@ -8,46 +8,40 @@ import './Dashboard.css';
 const Dashboard = () => {
   const [favorites, setFavorites] = useState([]);
   const [filter, setFilter] = useState('rank');
-  const prevFavoritesLength = useRef(favorites.length);
 
-  useEffect(() => {
+  const fetchFavoritesData = async () => {
     const savedFavorites = loadFavorites();
-    setFavorites(savedFavorites);
-  }, []);
+    if (savedFavorites.length === 0) {
+      setFavorites([]);
+      return;
+    }
 
-  const updateFavoritesData = useCallback(async () => {
-    const updatedFavorites = await Promise.all(
-      favorites.map(async (fav) => {
-        try {
+    try {
+      const updatedFavorites = await Promise.all(
+        savedFavorites.map(async (fav) => {
           const updatedCurrency = await getCurrencyById(fav.id);
           const historicalData = await getHistoricalData(fav.id);
-          const sixMonthPerformance = calculateSixMonthPerformance(historicalData);
-          return { ...fav, ...updatedCurrency, sixMonthPerformance };
-        } catch (error) {
-          console.error(`Error fetching data for ${fav.id}:`, error);
-          return fav;
-        }
-      })
-    );
-    setFavorites(updatedFavorites);
-  }, [favorites]);
+          const oneYearPerformance = calculateOneYearPerformance(historicalData); // Updated to one year
+          return { ...fav, ...updatedCurrency, oneYearPerformance }; // Updated to one year
+        })
+      );
+      setFavorites(updatedFavorites);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   useEffect(() => {
-    if (favorites.length !== prevFavoritesLength.current) {
-      prevFavoritesLength.current = favorites.length;
-      if (favorites.length > 0) {
-        updateFavoritesData();
-      }
-    }
-  }, [favorites, updateFavoritesData]);
+    fetchFavoritesData();
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      updateFavoritesData();
+      fetchFavoritesData(); // Call the fetch function within the interval
     }, 10000);
 
     return () => clearInterval(interval);
-  }, [updateFavoritesData]);
+  }, [favorites]);
 
   const removeFavorite = (currencyId) => {
     const updatedFavorites = favorites.filter((fav) => fav.id !== currencyId);
@@ -69,9 +63,9 @@ const Dashboard = () => {
         return [...favorites].sort(
           (a, b) => parseFloat(a.changePercent24Hr) - parseFloat(b.changePercent24Hr)
         );
-      case '6month':
+      case '1year': // Updated to 1 year
         return [...favorites].sort(
-          (a, b) => parseFloat(b.sixMonthPerformance.percentageChange) - parseFloat(a.sixMonthPerformance.percentageChange)
+          (a, b) => parseFloat(b.oneYearPerformance.percentageChange) - parseFloat(a.oneYearPerformance.percentageChange) // Updated to 1 year
         );
       case 'rank':
       default:

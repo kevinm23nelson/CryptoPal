@@ -1,0 +1,19 @@
+{
+    "bitcoin": [
+      { "time": "2023-01-01", "priceUsd": "50000.00" },
+      { "time": "2024-01-01", "priceUsd": "66182.00" }
+    ],
+    "ethereum": [
+      { "time": "2023-01-01", "priceUsd": "3000.00" },
+      { "time": "2024-01-01", "priceUsd": "4015.22" }
+    ],
+    "tether": [
+      { "time": "2023-01-01", "priceUsd": "1.00" },
+      { "time": "2024-01-01", "priceUsd": "1.00" }
+    ],
+    "binance-coin": [
+      { "time": "2023-01-01", "priceUsd": "300.00" },
+      { "time": "2024-01-01", "priceUsd": "525.32" }
+    ]
+  }
+  

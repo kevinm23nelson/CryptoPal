@@ -4,40 +4,72 @@ import { useNavigate } from 'react-router-dom';
 import { getHistoricalData } from '../../api/apiCalls';
 import './CurrencyCard.css';
 
-export const calculateSixMonthPerformance = (historicalData) => {
+// Function to calculate one year performance
+export const calculateOneYearPerformance = (historicalData) => {
   if (historicalData.length === 0) return { percentageChange: 0 };
 
-  const sixMonthsAgo = new Date();
-  sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+  // Calculate one year ago date
+  const oneYearAgo = new Date();
+  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
 
-  const pastData = historicalData.find(dataPoint => new Date(dataPoint.time) <= sixMonthsAgo);
-  const latestData = historicalData[historicalData.length - 1];
+  console.log('One year ago date:', oneYearAgo);
 
-  if (!pastData) return { percentageChange: 0 };
+  // Filter data points within the last year
+  const recentData = historicalData.filter(dataPoint => new Date(dataPoint.time) >= oneYearAgo);
 
-  const percentageChange = ((latestData.priceUsd - pastData.priceUsd) / pastData.priceUsd) * 100;
+  console.log('Filtered recent data:', recentData);
+
+  // Early return if there isn't enough data
+  if (recentData.length < 2) {
+    console.log('Not enough data to calculate performance');
+    return { percentageChange: 0 };
+  }
+
+  // Find the earliest and latest data points in the filtered data
+  const earliestData = recentData[0];
+  const latestData = recentData[recentData.length - 1];
+
+  console.log('Earliest data point:', earliestData);
+  console.log('Latest data point:', latestData);
+
+  // Calculate percentage change
+  const percentageChange = ((latestData.priceUsd - earliestData.priceUsd) / earliestData.priceUsd) * 100;
+
+  console.log('Percentage change:', percentageChange);
 
   return { percentageChange: percentageChange.toFixed(2) };
 };
+;
 
 const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
   const navigate = useNavigate();
-  const [sixMonthChanges, setSixMonthChanges] = useState({});
+  const [oneYearChanges, setOneYearChanges] = useState({});
 
   useEffect(() => {
-    const fetchSixMonthChanges = async () => {
+    const fetchOneYearChanges = async () => {
       const changes = {};
 
-      for (const currency of favorites) {
+      // Fetch historical data for all currencies in parallel
+      const historicalDataPromises = favorites.map(async (currency) => {
         const historicalData = await getHistoricalData(currency.id);
-        const sixMonthPerformance = calculateSixMonthPerformance(historicalData);
-        changes[currency.id] = sixMonthPerformance.percentageChange;
-      }
+        const oneYearPerformance = calculateOneYearPerformance(historicalData);
+        return { id: currency.id, oneYearPerformance };
+      });
 
-      setSixMonthChanges(changes);
+      try {
+        // Resolve all promises
+        const results = await Promise.all(historicalDataPromises);
+        // Map results to the state
+        results.forEach(({ id, oneYearPerformance }) => {
+          changes[id] = oneYearPerformance.percentageChange;
+        });
+        setOneYearChanges(changes);
+      } catch (error) {
+        console.error('Error fetching historical data:', error);
+      }
     };
 
-    fetchSixMonthChanges();
+    fetchOneYearChanges();
   }, [favorites]);
 
   const handleRemoveFavorite = (currencyId) => {
@@ -80,7 +112,7 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
                 <p>Market Cap USD: {formatPrice(currency.marketCapUsd)}</p>
                 <p>Price USD: {formatPrice(currency.priceUsd)}</p>
                 <p>Change (24hr): {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
-                <p>Change (6 months): {sixMonthChanges[currency.id] || 'Loading...'}%</p>
+                <p>Change (1 year): {oneYearChanges[currency.id] || 'Loading...'}%</p>
               </div>
               <div className="button-container">
                 <button

@@ -5,6 +5,7 @@ import './SideBar.css';
 const SideBar = () => {
   return (
     <div className="app-sidebar">
+      <h1 className="sidebar-header">CryptoPal</h1>
       <ul className="sidebar-links">
         <li>
           <Link to="/" className="sidebar-button">
