@@ -11,6 +11,12 @@
   padding: 15px;
   border-radius: 5px;
   background-color: #f9f9f9;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.currency-list-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .favorite-button {
@@ -30,4 +36,11 @@
 
 .favorite-button:hover {
   background-color: #f0a4a4;
+}
+
+.error-message {
+  color: red;
+  font-size: 1.2em;
+  text-align: center;
+  width: 100%;
 }
