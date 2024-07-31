@@ -8,12 +8,12 @@ describe('SearchBar', () => {
     cy.get('.search-bar input').type('tron');
 
     cy.get('.currency-list').within(() => {
-      cy.contains('.currency-list-item', 'Tron').should('exist');
+      cy.contains('.currency-list-item', 'TRON').should('exist');
       cy.contains('.currency-list-item', 'Bitcoin').should('not.exist');
       cy.contains('.currency-list-item', 'Ethereum').should('not.exist');
       cy.contains('.currency-list-item', 'Bibox Token').should('not.exist');
     });
-    
+
     cy.get('.search-bar input').clear().type('nonexistent');
 
     cy.get('.currency-list').within(() => {

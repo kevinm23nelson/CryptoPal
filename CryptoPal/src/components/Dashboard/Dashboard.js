@@ -39,14 +39,14 @@ const Dashboard = () => {
     fetchFavoritesData();
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      console.log('Fetching data at interval');
-      fetchFavoritesData();
-    }, 10000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     console.log('Fetching data at interval');
+  //     fetchFavoritesData();
+  //   }, 10000);
 
-    return () => clearInterval(interval);
-  }, [favorites]);
+  //   return () => clearInterval(interval);
+  // }, [favorites]);
 
   const removeFavorite = (currencyId) => {
     const updatedFavorites = favorites.filter((fav) => fav.id !== currencyId);
