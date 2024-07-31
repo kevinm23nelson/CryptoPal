@@ -4,43 +4,23 @@ import { useNavigate } from 'react-router-dom';
 import { getHistoricalData } from '../../api/apiCalls';
 import './CurrencyCard.css';
 
-// Function to calculate one year performance
 export const calculateOneYearPerformance = (historicalData) => {
   if (historicalData.length === 0) return { percentageChange: 0 };
 
-  // Calculate one year ago date
   const oneYearAgo = new Date();
   oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
 
-  console.log('One year ago date:', oneYearAgo);
-
-  // Filter data points within the last year
   const recentData = historicalData.filter(dataPoint => new Date(dataPoint.time) >= oneYearAgo);
 
-  console.log('Filtered recent data:', recentData);
-
-  // Early return if there isn't enough data
   if (recentData.length < 2) {
-    console.log('Not enough data to calculate performance');
     return { percentageChange: 0 };
   }
 
-  // Find the earliest and latest data points in the filtered data
   const earliestData = recentData[0];
   const latestData = recentData[recentData.length - 1];
-
-  console.log('Earliest data point:', earliestData);
-  console.log('Latest data point:', latestData);
-
-  // Calculate percentage change
   const percentageChange = ((latestData.priceUsd - earliestData.priceUsd) / earliestData.priceUsd) * 100;
-
-  console.log('Percentage change:', percentageChange);
-
-  return { percentageChange: percentageChange.toFixed(2) };
+  return { percentageChange: percentageChange.toFixed(2)};
 };
-;
-
 const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
   const navigate = useNavigate();
   const [oneYearChanges, setOneYearChanges] = useState({});
@@ -49,7 +29,6 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
     const fetchOneYearChanges = async () => {
       const changes = {};
 
-      // Fetch historical data for all currencies in parallel
       const historicalDataPromises = favorites.map(async (currency) => {
         const historicalData = await getHistoricalData(currency.id);
         const oneYearPerformance = calculateOneYearPerformance(historicalData);
@@ -57,9 +36,7 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
       });
 
       try {
-        // Resolve all promises
         const results = await Promise.all(historicalDataPromises);
-        // Map results to the state
         results.forEach(({ id, oneYearPerformance }) => {
           changes[id] = oneYearPerformance.percentageChange;
         });
@@ -131,7 +108,7 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
             </div>
           ))
         ) : (
-          <p>No favorites selected. Go to the "Explore" page!</p>
+          <p className="no-favorites-message">No favorites selected. Go to the "Explore" page!</p>
         )}
       </div>
     </div>
