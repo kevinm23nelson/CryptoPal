@@ -6,8 +6,16 @@
   }
   
   .explore-page-header {
+    background-color: #4a8a3f; /* Darker green for contrast */
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1.2em; /* Match sidebar header size */
     text-align: center;
-    margin-bottom: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Match sidebar shadow */
+    margin-bottom: 20px; /* Space below header */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Text shadow for better readability */
   }
+  
 
   

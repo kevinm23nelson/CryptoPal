@@ -4,23 +4,24 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
-}
-
-.currency-card-header {
+    overflow: hidden; /* Prevent overflow issues */
+  }
+  
+  .currency-card-header {
     font-size: 1.5em;
     margin-bottom: 20px;
     text-align: center;
-}
-
-.currency-card-body {
+  }
+  
+  .currency-card-body {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-}
-
-.currency-item {
-    flex: 1 1 300px;
+  }
+  
+  .currency-item {
+    flex: 1 1 calc(33.333% - 20px); /* Adjust size based on screen width */
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -29,41 +30,38 @@
     transition: transform 0.3s, box-shadow 0.3s;
     width: 100%;
     max-width: 300px;
-    transition: all 0.3s ease-in-out;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.currency-item:hover {
+  }
+  
+  .currency-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.currency-item.removing {
+  }
+  
+  .currency-item.removing {
     opacity: 0;
     transition: opacity 0.3s ease-out;
-}
-
-.currency-header {
+  }
+  
+  .currency-header {
     background-color: #eee;
     padding: 5px;
     border-radius: 5px;
     font-weight: bold;
     display: flex;
     justify-content: space-around;
-}
-
-.currency-details {
+  }
+  
+  .currency-details {
     justify-content: space-between;
     padding: 5px 0;
-}
-
-.button-container {
+  }
+  
+  .button-container {
     display: flex;
-    gap: 10px; /* Adjust the spacing as needed */
-}
-
-.favorite-button {
+    gap: 10px;
+  }
+  
+  .favorite-button {
     background-color: #ffddc1;
     border: none;
     padding: 5px;
@@ -71,61 +69,57 @@
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s;
-}
-
-.favorite-button.favorited {
+  }
+  
+  .favorite-button.favorited {
     background-color: #f76c6c;
     color: white;
-}
-
-.favorite-button:hover {
+  }
+  
+  .favorite-button:hover {
     background-color: #f0a4a4;
-}
-
-.dashboard-view-details-button {
+  }
+  
+  .dashboard-view-details-button {
     background-color: #007bff;
     border-radius: 4px;
     color: white;
     border: none;
-    padding: 10px;
-    height: 36px;
+
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s;
-    margin-left: 10px; /* Adjust the spacing between buttons */
-}
-
-.dashboard-view-details-button:hover {
+    margin-left: 8px;
+  }
+  
+  .dashboard-view-details-button:hover {
     background-color: #6ca4f7;
     color: white;
-}
-
-/* Positive and negative change colors for the header */
-.currency-item.positive .currency-header {
+  }
+  
+  /* Positive and negative change colors for the header */
+  .currency-item.positive .currency-header {
     background-color: #85bb65; /* Positive change color */
-}
-
-.currency-item.negative .currency-header {
+  }
+  
+  .currency-item.negative .currency-header {
     background-color: #f76c6c; /* Negative change color */
-}
-
-/* Responsive design */
-@media (max-width: 1200px) {
+  }
+  
+  /* Responsive design */
+  @media (max-width: 1200px) {
     .currency-item {
-        max-width: 250px;
+      flex: 1 1 calc(50% - 20px); /* Adjust size on smaller screens */
     }
-}
-
-@media (max-width: 768px) {
-    .currency-card-body {
-        flex-direction: column;
-        align-items: center;
-    }
+  }
+  
+  @media (max-width: 768px) {
     .currency-item {
-        max-width: 100%;
+      flex: 1 1 100%; /* Full width on very small screens */
     }
-}
-
-.currency-details-page {
+  }
+  
+  .currency-details-page {
     padding: 20px;
-}
+  }
+  
