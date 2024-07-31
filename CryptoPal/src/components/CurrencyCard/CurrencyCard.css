@@ -6,13 +6,11 @@
     background-color: #f9f9f9;
 }
 
-
 .currency-card-header {
     font-size: 1.5em;
     margin-bottom: 20px;
     text-align: center;
 }
-
 
 .currency-card-body {
     display: flex;
@@ -36,7 +34,6 @@
     transform: translateY(0);
 }
 
-
 .currency-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -44,7 +41,72 @@
 
 .currency-item.removing {
     opacity: 0;
-    transform: translateY(-10px);
+    transition: opacity 0.3s ease-out;
+}
+
+.currency-header {
+    background-color: #eee;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-around;
+}
+
+.currency-details {
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px; /* Adjust the spacing as needed */
+}
+
+.favorite-button {
+    background-color: #ffddc1;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.favorite-button.favorited {
+    background-color: #f76c6c;
+    color: white;
+}
+
+.favorite-button:hover {
+    background-color: #f0a4a4;
+}
+
+.dashboard-view-details-button {
+    background-color: #007bff;
+    border-radius: 4px;
+    color: white;
+    border: none;
+    padding: 10px;
+    height: 36px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-left: 10px; /* Adjust the spacing between buttons */
+}
+
+.dashboard-view-details-button:hover {
+    background-color: #6ca4f7;
+    color: white;
+}
+
+/* Positive and negative change colors for the header */
+.currency-item.positive .currency-header {
+    background-color: #85bb65; /* Positive change color */
+}
+
+.currency-item.negative .currency-header {
+    background-color: #f76c6c; /* Negative change color */
 }
 
 /* Responsive design */
@@ -55,7 +117,15 @@
 }
 
 @media (max-width: 768px) {
+    .currency-card-body {
+        flex-direction: column;
+        align-items: center;
+    }
     .currency-item {
         max-width: 100%;
     }
+}
+
+.currency-details-page {
+    padding: 20px;
 }

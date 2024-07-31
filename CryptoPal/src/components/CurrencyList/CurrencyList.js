@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import { getCurrencies } from '../../api/apiCalls';
 import './CurrencyList.css';
 
 const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
   const [currencies, setCurrencies] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,28 +35,56 @@ const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
     }
   }, [searchQuery, filteredCurrencies]);
 
+  const formatPrice = (price) => {
+    return parseFloat(price).toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
+  const handleViewDetails = (id) => {
+    navigate(`/currency/${id}`);
+  };
+
   return (
     <div className="currency-list">
       {errorMessage ? (
         <p className="error-message">{errorMessage}</p>
       ) : (
         filteredCurrencies.map((currency) => (
-          <div key={currency.id} className="currency-list-item">
-            <p>Name: {currency.name}</p>
-            <p>Rank: {currency.rank}</p>
-            <p>Symbol: {currency.symbol}</p>
-            <p>Market Cap USD: {currency.marketCapUsd}</p>
-            <p>Price USD: {currency.priceUsd}</p>
-            <p>Change (24hr): {currency.changePercent24Hr}</p>
-            <p>Change (6 Months): {currency.sixMonthChange}</p>
-            <button
-              className={`favorite-button ${
-                favorites.find((fav) => fav.id === currency.id) ? 'favorited' : ''
-              }`}
-              onClick={() => toggleFavorite(currency)}
-            >
-              {favorites.find((fav) => fav.id === currency.id) ? 'Unfavorite' : 'Favorite'}
-            </button>
+          <div
+            key={currency.id}
+            className={`currency-list-item ${
+              parseFloat(currency.changePercent24Hr) >= 0 ? 'positive' : 'negative'
+            }`}
+          >
+            <div className="currency-header">
+              <p>{currency.name}</p>
+              <p>Symbol: {currency.symbol}</p>
+            </div>
+            <div className="explore-currency-details">
+              <p>Rank: {currency.rank}</p>
+              <p>Price: {formatPrice(currency.priceUsd)}</p>
+              <p>Change (24hr): {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
+            </div>
+            <div className="button-container">
+              <button
+                className={`favorite-button ${
+                  favorites.find((fav) => fav.id === currency.id) ? 'favorited' : ''
+                }`}
+                onClick={() => toggleFavorite(currency)}
+              >
+                {favorites.find((fav) => fav.id === currency.id) ? 'Unfavorite' : 'Favorite'}
+              </button>
+              <button
+                className="view-details-button"
+                onClick={() => handleViewDetails(currency.id)}
+              >
+                View Details
+              </button>
+            </div>
           </div>
         ))
       )}
@@ -67,13 +97,6 @@ CurrencyList.propTypes = {
   favorites: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      rank: PropTypes.number.isRequired,
-      symbol: PropTypes.string.isRequired,
-      marketCapUsd: PropTypes.string.isRequired,
-      priceUsd: PropTypes.string.isRequired,
-      changePercent24Hr: PropTypes.string.isRequired,
-      sixMonthChange: PropTypes.string.isRequired,
     })
   ).isRequired,
   toggleFavorite: PropTypes.func.isRequired,
