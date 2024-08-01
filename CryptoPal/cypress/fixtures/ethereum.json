@@ -1,0 +1,15 @@
+{
+    "data": {
+        "id": "ethereum",
+        "rank": "2",
+        "symbol": "ETH",
+        "name": "Ethereum",
+        "supply": "101160540.0000000000000000",
+        "maxSupply": null,
+        "marketCapUsd": "40967739219.6612727047843840",
+        "volumeUsd24Hr": "1026669440.6451482672850841",
+        "priceUsd": "404.9774667045200896",
+        "changePercent24Hr": "-0.0999626159535347",
+        "vwap24Hr": "415.3288028454417241"
+    }
+}

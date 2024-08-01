@@ -10,6 +10,18 @@
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
   }
   
+  .sidebar-header {
+    background-color: #4a8a3f; /* Darker green for contrast */
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1.5em;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
   .sidebar-links {
     list-style-type: none;
     padding: 0;
