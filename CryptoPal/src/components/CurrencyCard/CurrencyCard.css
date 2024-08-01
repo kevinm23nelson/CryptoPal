@@ -22,7 +22,47 @@
     justify-content: center;
 }
 
-
+.currency-header {
+    background-color: #eee;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .performance-arrow {
+    width: 30px; /* Adjust size as needed */
+    height: auto;
+    margin-right: 10px; /* Space between the arrow and text */
+  }
+  
+  .flipped {
+    transform: rotate(180deg); /* Flip the arrow upside down */
+  }
+  
+  .currency-item.positive .currency-header {
+    background-color: #85bb65; /* Positive change color */
+  }
+  
+  .currency-item.negative .currency-header {
+    background-color: #f76c6c; /* Negative change color */
+  }
+  
+  /* Responsive design */
+  @media (max-width: 1200px) {
+    .currency-item {
+      flex: 1 1 calc(50% - 20px); /* Adjust size on smaller screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .currency-item {
+      flex: 1 1 100%; /* Full width on very small screens */
+    }
+  }
+  
 .currency-item {
     flex: 1 1 calc(33.333% - 20px);
     /* Adjust size based on screen width */
@@ -131,3 +171,4 @@
 .currency-details-page {
     padding: 20px;
 }
+

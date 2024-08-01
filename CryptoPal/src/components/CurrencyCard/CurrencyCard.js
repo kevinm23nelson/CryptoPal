@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { getHistoricalData } from '../../api/apiCalls';
 import './CurrencyCard.css';
+import arrowUp from '../../images/elevator-arrow-up.gif'; 
 
 export const calculateOneYearPerformance = (historicalData) => {
   console.log('Calculating one year performance for historical data:', historicalData);
@@ -88,7 +89,7 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite, loading }) => {
       </div>
       <div className="currency-card-body">
         {loading ? (
-          <p className="loading-message">Loading...</p> // Display loading message
+          <p className="loading-message">Loading...</p>
         ) : favorites.length > 0 ? (
           favorites.map((currency) => (
             <div
@@ -98,6 +99,11 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite, loading }) => {
               }`}
             >
               <div className="currency-header">
+                <img
+                  src={arrowUp}
+                  alt="Performance arrow"
+                  className={`performance-arrow ${parseFloat(currency.changePercent24Hr) < 0 ? 'flipped' : ''}`}
+                />
                 <p>Coin: {currency.name}</p>
                 <p className="currency-symbol">Symbol: {currency.symbol}</p>
               </div>
