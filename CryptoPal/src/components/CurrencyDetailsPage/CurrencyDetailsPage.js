@@ -63,7 +63,7 @@ const CurrencyDetailsPage = () => {
           </div>
         </div>
       ) : (
-        <p>Loading...</p>
+        <p className="loading-message-details-page">Loading...</p>
       )}
     </div>
   );

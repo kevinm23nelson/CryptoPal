@@ -3,14 +3,15 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+    padding-left: 40px;
   }
   
   .explore-page-header {
-    background-color: #4a8a3f; /* Darker green for contrast */
+    background-color: #6fb762; /* Darker green for contrast */
     color: white;
     padding: 10px;
     border-radius: 10px;
-    font-size: 1.2em; /* Match sidebar header size */
+    font-size: 1em; /* Match sidebar header size */
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Match sidebar shadow */
     margin-bottom: 20px; /* Space below header */

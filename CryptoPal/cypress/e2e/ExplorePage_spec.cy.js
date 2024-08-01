@@ -52,17 +52,17 @@ describe('ExplorePage', () => {
   it('should toggle Favorite and Unfavorite buttons correctly', () => {
     cy.get('.currency-list').within(() => {
       cy.contains('.currency-list-item', 'TRON')
-        .find('.favorite-button') 
+        .find('.currency-list-favorite-button') 
         .should('contain.text', 'Favorite') 
         .click(); 
         
       cy.contains('.currency-list-item', 'TRON')
-        .find('.favorite-button')
+        .find('.currency-list-favorite-button')
         .should('contain.text', 'Unfavorite')
         .click();
 
       cy.contains('.currency-list-item', 'TRON')
-        .find('.favorite-button')
+        .find('.currency-list-favorite-button')
         .should('contain.text', 'Favorite');
     });
   });

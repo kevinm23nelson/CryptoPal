@@ -1,49 +1,109 @@
-/* SideBar.css */
 .app-sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 150px;
-    background-color: #85bb65; /* Money green color */
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 180px; /* Adjusted width for larger icon and text */
+  background-color: #6fb762; /* Money green color */
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: width 0.3s; /* Smooth transition for width change */
+  z-index: 1; /* Ensure sidebar is above main content */
+}
+
+.sidebar-header {
+  display: flex; /* Align items horizontally */
+  align-items: center; /* Center align items vertically */
+  background-color: #4a8a3f; /* Darker green for contrast */
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.header-icon {
+  width: 50px; /* Larger icon */
+  height: 50px;
+  margin-right: 3px; /* Space between icon and text */
+}
+
+.sidebar-header-text {
+  font-size: 1.5em; /* Larger text */
+}
+
+.sidebar-links {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-button {
+  display: flex; /* Use flexbox to align items */
+  align-items: center; /* Center align items vertically */
+  margin: 15px 0;
+  padding: 10px 15px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  background-color: transparent;
+  border: none;
+  border-radius: 10px; /* Rounded edges */
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.sidebar-button:hover {
+  background-color: #73a554;
+  transform: translateX(5px);
+}
+
+.sidebar-icon {
+  margin-right: 10px; /* Add some space between the icon and the text */
+  width: 20px; /* Set icon width */
+  height: 20px; /* Set icon height */
+}
+
+.sidebar-text {
+  display: block; /* Ensure text is displayed */
+}
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+  .app-sidebar {
+    width: 50px; /* Shrink width for mobile view */
+    padding: 10px; /* Adjust padding for smaller width */
   }
-  
+
   .sidebar-header {
-    background-color: #4a8a3f; /* Darker green for contrast */
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    font-size: 1.5em;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    flex-direction: column; /* Align items vertically */
   }
-  
-  .sidebar-links {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+
+  .header-icon {
+    margin-right: 0; /* Center icon in column layout */
+    margin-bottom: 10px; /* Space between icon and hidden text */
+    width: 30px; /* Adjust icon size for mobile view */
+    height: 30px;
   }
-  
+
+  .sidebar-header-text {
+    display: none; /* Hide text in mobile view */
+  }
+
   .sidebar-button {
-    display: block;
-    margin: 15px 0;
-    padding: 10px 15px;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    background-color: transparent;
-    border: none;
-    border-radius: 10px; /* Rounded edges */
-    transition: background-color 0.3s, transform 0.3s;
+    justify-content: center; /* Center align items horizontally */
+    padding: 5px; /* Adjust padding for smaller width */
+    font-size: 0.9em; /* Adjust font size for smaller width */
   }
-  
-  .sidebar-button:hover {
-    background-color: #73a554; 
-    transform: translateX(5px);
+
+  .sidebar-icon {
+    margin-right: 0; /* Remove space between the icon and the text */
+    width: 20px; /* Adjust icon size for smaller width */
+    height: 20px; /* Adjust icon size for smaller width */
   }
-  
+
+  .sidebar-text {
+    display: none; /* Hide text in mobile view */
+  }
+}

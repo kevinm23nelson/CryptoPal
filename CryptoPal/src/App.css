@@ -1,4 +1,3 @@
-/* App.css */
 .App {
   font-family: Arial, sans-serif;
 }
@@ -9,8 +8,24 @@
 
 .main-content {
   flex-grow: 1;
-  padding: 10px;
-  margin-left: 200px; /* Offset by the width of the sidebar */
-  overflow: auto; /* Handle overflow */
-  position: relative;
+  padding: 20px;
+  margin-left: 170px;
+  overflow: auto; 
+  transition: margin-left 0.3s; 
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('./images/gradient-background.avif');
+  background-size: cover; /* Adjust size to cover the whole viewport */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent repeating the background image */
+  background-attachment: fixed; /* Optional: Fix the background image so it stays in place during scrolling */
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 30px;
+  }
 }
