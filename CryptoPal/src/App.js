@@ -1,3 +1,4 @@
+// App.js
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Dashboard from './components/Dashboard/Dashboard';
@@ -5,7 +6,8 @@ import ExplorePage from './components/ExplorePage/ExplorePage';
 import CurrencyDetailsPage from './components/CurrencyDetailsPage/CurrencyDetailsPage';
 import SideBar from './components/SideBar/SideBar';
 import TradePage from './components/TradePage/TradePage';
-import AssetsPage from './components/AssetsPage/AssetsPage'; 
+import AssetsPage from './components/AssetsPage/AssetsPage';
+import AssetsPastTransactions from './components/AssetsPage/AssetsPastTransactions.js'; // Import the new component
 
 function App() {
   return (
@@ -19,7 +21,8 @@ function App() {
               <Route path="/explore" element={<ExplorePage />} />
               <Route path="/currency/:id" element={<CurrencyDetailsPage />} />
               <Route path="/trade" element={<TradePage />} />
-              <Route path="/assets" element={<AssetsPage />} /> {/* Add route for AssetsPage */}
+              <Route path="/assets" element={<AssetsPage />} />
+              <Route path="/assets-past-transactions/:id" element={<AssetsPastTransactions />} /> {/* Add new route */}
             </Routes>
           </div>
         </div>

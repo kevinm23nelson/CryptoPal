@@ -1,3 +1,4 @@
+// Dashboard.js
 import React, { useEffect, useState } from 'react';
 import { loadFavorites, saveFavorites } from '../../utils/localStorage/LocalStorage';
 import CurrencyCard, { calculateOneYearPerformance } from '../CurrencyCard/CurrencyCard';
@@ -93,7 +94,7 @@ const Dashboard = () => {
         <h1>Dashboard</h1>
       </div>
       <div className="filter-container">
-        <Filter onFilterChange={handleFilterChange} />
+        <Filter onFilterChange={handleFilterChange} includeOneYear={true} />
       </div>
       <CurrencyCard 
         favorites={getFilteredFavorites()} 

@@ -31,4 +31,17 @@
   .asset-card p {
     margin: 5px 0;
   }
+
+  .view-details-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .view-details-button:hover {
+    background-color: #0056b3;
+  }
   

@@ -27,10 +27,17 @@
 .explore-currency-details {
   display: flex;
   justify-content: space-between;
-  padding: 5px 0;
+}
+.explore-currency-details p {
+  margin: 0 10px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background-color: #fff;
 }
 
 .button-container {
+  padding-top: 8px;
   display: flex;
   gap: 10px; 
 }
