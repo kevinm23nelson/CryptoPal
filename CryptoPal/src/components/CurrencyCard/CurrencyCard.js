@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { getHistoricalData } from '../../api/apiCalls';
 import './CurrencyCard.css';
+import arrowUp from '../../images/elevator-arrow-up.gif'; 
 
 export const calculateOneYearPerformance = (historicalData) => {
   console.log('Calculating one year performance for historical data:', historicalData);
@@ -35,7 +36,7 @@ export const calculateOneYearPerformance = (historicalData) => {
   return { percentageChange: percentageChange.toFixed(2) };
 };
 
-const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
+const CurrencyCard = ({ favorites = [], onRemoveFavorite, loading }) => {
   const navigate = useNavigate();
   const [oneYearChanges, setOneYearChanges] = useState({});
 
@@ -87,7 +88,9 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
         <h2>Favorite Currencies</h2>
       </div>
       <div className="currency-card-body">
-        {favorites.length > 0 ? (
+        {loading ? (
+          <p className="loading-message">Loading...</p>
+        ) : favorites.length > 0 ? (
           favorites.map((currency) => (
             <div
               key={currency.id}
@@ -96,6 +99,11 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite }) => {
               }`}
             >
               <div className="currency-header">
+                <img
+                  src={arrowUp}
+                  alt="Performance arrow"
+                  className={`performance-arrow ${parseFloat(currency.changePercent24Hr) < 0 ? 'flipped' : ''}`}
+                />
                 <p>Coin: {currency.name}</p>
                 <p className="currency-symbol">Symbol: {currency.symbol}</p>
               </div>
@@ -135,18 +143,15 @@ CurrencyCard.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      rank: PropTypes.string.isRequired,
+      rank: PropTypes.number.isRequired,
       symbol: PropTypes.string.isRequired,
-      marketCapUsd: PropTypes.string.isRequired,
       priceUsd: PropTypes.string.isRequired,
       changePercent24Hr: PropTypes.string.isRequired,
+      marketCapUsd: PropTypes.string.isRequired,
     })
-  ),
+  ).isRequired,
   onRemoveFavorite: PropTypes.func.isRequired,
-};
-
-CurrencyCard.defaultProps = {
-  favorites: [],
+  loading: PropTypes.bool.isRequired, // PropType for loading
 };
 
 export default CurrencyCard;

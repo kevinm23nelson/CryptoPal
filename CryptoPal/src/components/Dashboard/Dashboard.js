@@ -8,6 +8,7 @@ import './Dashboard.css';
 const Dashboard = () => {
   const [favorites, setFavorites] = useState([]);
   const [filter, setFilter] = useState('rank');
+  const [loading, setLoading] = useState(true); // Add loading state
 
   const fetchFavoritesData = async () => {
     const savedFavorites = loadFavorites();
@@ -15,6 +16,7 @@ const Dashboard = () => {
 
     if (savedFavorites.length === 0) {
       setFavorites([]);
+      setLoading(false); // Set loading to false when there are no favorites
       return;
     }
 
@@ -29,9 +31,11 @@ const Dashboard = () => {
         })
       );
       setFavorites(updatedFavorites);
+      setLoading(false); // Set loading to false once data is fetched
       console.log('Updated favorites:', updatedFavorites);
     } catch (error) {
       console.error('Error fetching data:', error);
+      setLoading(false); // Set loading to false even if there's an error
     }
   };
 
@@ -39,14 +43,14 @@ const Dashboard = () => {
     fetchFavoritesData();
   }, []);
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     console.log('Fetching data at interval');
-  //     fetchFavoritesData();
-  //   }, 10000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log('Fetching data at interval');
+      fetchFavoritesData();
+    }, 10000);
 
-  //   return () => clearInterval(interval);
-  // }, [favorites]);
+    return () => clearInterval(interval);
+  }, [favorites]);
 
   const removeFavorite = (currencyId) => {
     const updatedFavorites = favorites.filter((fav) => fav.id !== currencyId);
@@ -88,8 +92,14 @@ const Dashboard = () => {
       <div className="dashboard-header">
         <h1>Dashboard</h1>
       </div>
-      <Filter onFilterChange={handleFilterChange} />
-      <CurrencyCard favorites={getFilteredFavorites()} onRemoveFavorite={removeFavorite} />
+      <div className="filter-container">
+        <Filter onFilterChange={handleFilterChange} />
+      </div>
+      <CurrencyCard 
+        favorites={getFilteredFavorites()} 
+        onRemoveFavorite={removeFavorite} 
+        loading={loading} // Pass loading state to CurrencyCard
+      />
     </div>
   );
 };

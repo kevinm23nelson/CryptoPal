@@ -35,7 +35,7 @@
   gap: 10px; /* Adjust the spacing as needed */
 }
 
-.favorite-button {
+.currency-list-favorite-button {
   background-color: #ffddc1;
   border: none;
   padding: 5px;
@@ -45,12 +45,12 @@
   transition: background-color 0.3s;
 }
 
-.favorite-button.favorited {
+.currency-list-favorite-button.favorited {
   background-color: #f76c6c;
   color: white;
 }
 
-.favorite-button:hover {
+.currency-list-favorite-button:hover {
   background-color: #f0a4a4;
 }
 

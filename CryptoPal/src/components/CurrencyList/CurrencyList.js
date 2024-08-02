@@ -71,7 +71,7 @@ const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
             </div>
             <div className="button-container">
               <button
-                className={`favorite-button ${
+                className={`currency-list-favorite-button ${
                   favorites.find((fav) => fav.id === currency.id) ? 'favorited' : ''
                 }`}
                 onClick={() => toggleFavorite(currency)}

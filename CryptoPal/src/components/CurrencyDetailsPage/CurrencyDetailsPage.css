@@ -1,18 +1,101 @@
+.loading-message-details-page {
+    margin-left: 48px;
+}
 .currency-details-page {
     padding: 20px;
-}
-
-.return-button {
-    background-color: #ffddc1;
-    border: none;
+    font-family: Arial, sans-serif;
+    margin-left: 30px;
+  }
+  
+  .currency-view-details {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 80%; /* Adjust width to be smaller */
+    max-width: 400px; /* Set a maximum width for larger screens */
+    margin: 0 auto;
+    box-sizing: border-box; /* Ensures padding and border are included in total width */
+    background-color: #f9f9f962;
+  }
+  
+  .currency-header {
+    background-color: #eee;
     padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-sizing: border-box; /* Ensures padding and border are included in total width */
+  }
+  
+  .positive-performance {
+    background-color: #85bb65;
+  }
+  
+  .negative-performance {
+    background-color: #f76c6c;
+  }
+  
+  .currency-header p {
+    margin: 5px 0;
+    font-size: 1em; /* Adjust font size for better fit on smaller screens */
+  }
+  
+  .currency-symbol {
+    font-weight: bold;
+  }
+  
+  .currency-details-body {
+    font-size: 1em; /* Adjust font size for better fit on smaller screens */
+    margin: 10px 0;
+  }
+  
+  .return-button {
+    background-color: #4a8a3f;
+    border: none;
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.return-button:hover {
-    background-color: #f76c6c;
     color: white;
-}
+    transition: background-color 0.3s;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    display: inline-block; /* Ensures button does not overflow */
+  }
+  
+  .return-button:hover {
+    background-color: #85bb65;
+  }
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 768px) {
+    .currency-view-details {
+      padding: 15px;
+      width: 90%; /* Increase width percentage for tablets and small screens */
+      max-width: 350px; /* Adjust max-width for medium screens */
+    }
+  
+    .currency-header, .currency-details-body {
+      font-size: 0.9em; /* Slightly smaller text on smaller screens */
+    }
+  
+    .return-button {
+      padding: 8px 16px; /* Adjust button size for smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .currency-view-details {
+      padding: 10px;
+      width: 95%; 
+      max-width: 300px; 
+    }
+  
+    .currency-header, .currency-details-body {
+      font-size: 0.8em; 
+    }
+  
+    .return-button {
+      padding: 6px 12px;
+    }
+  }
+  

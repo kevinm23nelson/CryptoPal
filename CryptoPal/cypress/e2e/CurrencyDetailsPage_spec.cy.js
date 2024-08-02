@@ -39,16 +39,16 @@ describe('CurrencyDetailsPage from Dashboard', () => {
     cy.wait('@getHistoricalData');
 
     // Check if the details page displays correct information
-    cy.get('.currency-details').should('exist');
-    cy.contains('.currency-details', 'Bitcoin').should('exist');
-    cy.contains('.currency-details', 'BTC').should('exist');
-    cy.contains('.currency-details', 'Supply: 17193925').should('exist');
-    cy.contains('.currency-details', 'Max Supply: 21000000.0').should('exist');
-    cy.contains('.currency-details', 'Market Cap USD: $119,179,791,817.67').should('exist');
-    cy.contains('.currency-details', 'Volume USD (24Hr): $2,928,356,777.61').should('exist');
-    cy.contains('.currency-details', 'Price USD: $6,931.51').should('exist');
-    cy.contains('.currency-details', '-0.81%').should('exist');
-    cy.contains('.currency-details', 'VWAP (24Hr): $7,175.07').should('exist');
+    cy.get('.currency-view-details').should('exist');
+    cy.contains('.currency-view-details', 'Bitcoin').should('exist');
+    cy.contains('.currency-view-details', 'BTC').should('exist');
+    cy.contains('.currency-view-details', 'Supply: 17193925').should('exist');
+    cy.contains('.currency-view-details', 'Max Supply: 21000000.0').should('exist');
+    cy.contains('.currency-view-details', 'Market Cap USD: $119,179,791,817.67').should('exist');
+    cy.contains('.currency-view-details', 'Volume USD (24Hr): $2,928,356,777.61').should('exist');
+    cy.contains('.currency-view-details', 'Price USD: $6,931.51').should('exist');
+    cy.contains('.currency-view-details', '-0.81%').should('exist');
+    cy.contains('.currency-view-details', 'VWAP (24Hr): $7,175.07').should('exist');
 
     // Check if the "Return to Dashboard" button exists and click it
     cy.get('.return-button').should('exist').contains('Return to Dashboard').click();
@@ -73,15 +73,15 @@ describe('CurrencyDetailsPage from ExplorePage', () => {
 
     cy.url().should('include', '/currency/bitcoin');
     cy.wait('@getCurrencyById').its('response.statusCode').should('eq', 200);
-    cy.contains('.currency-details', 'Bitcoin').should('exist');
-    cy.contains('.currency-details', 'BTC').should('exist');
-    cy.contains('.currency-details', 'Supply: 17193925').should('exist');
-    cy.contains('.currency-details', 'Max Supply: 21000000.0').should('exist');
-    cy.contains('.currency-details', 'Market Cap USD: $119,179,791,817.67').should('exist');
-    cy.contains('.currency-details', 'Volume USD (24Hr): $2,928,356,777.61').should('exist');
-    cy.contains('.currency-details', 'Price USD: $6,931.51').should('exist');
-    cy.contains('.currency-details', '-0.81%').should('exist');
-    cy.contains('.currency-details', 'VWAP (24Hr): $7,175.07').should('exist');
+    cy.contains('.currency-view-details', 'Bitcoin').should('exist');
+    cy.contains('.currency-view-details', 'BTC').should('exist');
+    cy.contains('.currency-view-details', 'Supply: 17193925').should('exist');
+    cy.contains('.currency-view-details', 'Max Supply: 21000000.0').should('exist');
+    cy.contains('.currency-view-details', 'Market Cap USD: $119,179,791,817.67').should('exist');
+    cy.contains('.currency-view-details', 'Volume USD (24Hr): $2,928,356,777.61').should('exist');
+    cy.contains('.currency-view-details', 'Price USD: $6,931.51').should('exist');
+    cy.contains('.currency-view-details', '-0.81%').should('exist');
+    cy.contains('.currency-view-details', 'VWAP (24Hr): $7,175.07').should('exist');
 
     cy.get('.return-button').should('exist').contains('Return to Explore').click();
     cy.url().should('eq', 'http://localhost:3000/explore');
