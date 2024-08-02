@@ -32,7 +32,7 @@
 
 .button-container {
   display: flex;
-  gap: 10px; /* Adjust the spacing as needed */
+  gap: 10px; 
 }
 
 .currency-list-favorite-button {
@@ -76,9 +76,9 @@
 }
 
 .currency-list-item.positive .currency-header {
-  background-color: #85bb65; /* Positive change color */
+  background-color: #85bb65; 
 }
 
 .currency-list-item.negative .currency-header {
-  background-color: #f76c6c; /* Negative change color */
+  background-color: #f76c6c; 
 }

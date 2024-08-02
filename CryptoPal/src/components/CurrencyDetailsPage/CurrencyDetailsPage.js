@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { getCurrencyById } from '../../api/apiCalls';
+import { getCurrencyById } from '../../utils/api/apiCalls';
 import './CurrencyDetailsPage.css';
 
 const CurrencyDetailsPage = () => {

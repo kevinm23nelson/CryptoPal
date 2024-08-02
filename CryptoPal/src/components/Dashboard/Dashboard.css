@@ -17,9 +17,8 @@
   margin-left: 48px;
 }
 
-/* Responsive Dashboard Styles */
 @media (max-width: 768px) {
   .dashboard-header {
-    font-size: .9em; /* Adjust header size on smaller screens */
+    font-size: .9em; 
   }
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { getHistoricalData } from '../../api/apiCalls';
+import { getHistoricalData } from '../../utils/api/apiCalls';
 import './CurrencyCard.css';
 import arrowUp from '../../images/elevator-arrow-up.gif'; 
 

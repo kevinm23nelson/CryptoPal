@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import CurrencyList from '../CurrencyList/CurrencyList';
-import { loadFavorites, saveFavorites } from '../../LocalStorage';
+import { loadFavorites, saveFavorites } from '../../utils/localStorage/LocalStorage';
 import './ExplorePage.css';
 
 const ExplorePage = () => {

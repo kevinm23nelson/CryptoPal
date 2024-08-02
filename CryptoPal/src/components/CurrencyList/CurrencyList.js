@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { getCurrencies } from '../../api/apiCalls';
+import { getCurrencies } from '../../utils/api/apiCalls';
 import './CurrencyList.css';
 
 const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {

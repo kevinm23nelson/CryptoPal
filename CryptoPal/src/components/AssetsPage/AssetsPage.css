@@ -1,0 +1,34 @@
+/* AssetsPage.css */
+.assets-page {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .asset-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-bottom: 10px;
+    width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .asset-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .asset-card h2 {
+    margin: 0;
+    padding: 5px;
+    background-color: #eee;
+    border-radius: 5px;
+  }
+  
+  .asset-card p {
+    margin: 5px 0;
+  }
+  

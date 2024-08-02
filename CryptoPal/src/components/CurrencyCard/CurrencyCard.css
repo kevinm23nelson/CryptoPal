@@ -6,7 +6,7 @@
     border-radius: 5px;
     background-color: #f9f9f962;
     overflow: hidden;
-    /* Prevent overflow issues */
+   
 }
 
 .currency-card-header {
@@ -33,39 +33,38 @@
   }
   
   .performance-arrow {
-    width: 30px; /* Adjust size as needed */
+    width: 30px; 
     height: auto;
-    margin-right: 10px; /* Space between the arrow and text */
+    margin-right: 10px; 
   }
   
   .flipped {
-    transform: rotate(180deg); /* Flip the arrow upside down */
+    transform: rotate(180deg); 
   }
   
   .currency-item.positive .currency-header {
-    background-color: #85bb65; /* Positive change color */
+    background-color: #85bb65; 
   }
   
   .currency-item.negative .currency-header {
-    background-color: #f76c6c; /* Negative change color */
+    background-color: #f76c6c; 
   }
   
   /* Responsive design */
   @media (max-width: 1200px) {
     .currency-item {
-      flex: 1 1 calc(50% - 20px); /* Adjust size on smaller screens */
+      flex: 1 1 calc(50% - 20px); 
     }
   }
   
   @media (max-width: 768px) {
     .currency-item {
-      flex: 1 1 100%; /* Full width on very small screens */
+      flex: 1 1 100%; 
     }
   }
   
 .currency-item {
     flex: 1 1 calc(33.333% - 20px);
-    /* Adjust size based on screen width */
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -142,29 +141,23 @@
     color: white;
 }
 
-/* Positive and negative change colors for the header */
 .currency-item.positive .currency-header {
     background-color: #85bb65;
-    /* Positive change color */
 }
 
 .currency-item.negative .currency-header {
     background-color: #f76c6c;
-    /* Negative change color */
 }
 
-/* Responsive design */
 @media (max-width: 1200px) {
     .currency-item {
         flex: 1 1 calc(50% - 20px);
-        /* Adjust size on smaller screens */
     }
 }
 
 @media (max-width: 768px) {
     .currency-item {
         flex: 1 1 100%;
-        /* Full width on very small screens */
     }
 }
 

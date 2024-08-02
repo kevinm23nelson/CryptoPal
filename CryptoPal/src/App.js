@@ -4,6 +4,8 @@ import Dashboard from './components/Dashboard/Dashboard';
 import ExplorePage from './components/ExplorePage/ExplorePage';
 import CurrencyDetailsPage from './components/CurrencyDetailsPage/CurrencyDetailsPage';
 import SideBar from './components/SideBar/SideBar';
+import TradePage from './components/TradePage/TradePage';
+import AssetsPage from './components/AssetsPage/AssetsPage'; 
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/explore" element={<ExplorePage />} />
               <Route path="/currency/:id" element={<CurrencyDetailsPage />} />
+              <Route path="/trade" element={<TradePage />} />
+              <Route path="/assets" element={<AssetsPage />} /> {/* Add route for AssetsPage */}
             </Routes>
           </div>
         </div>
@@ -25,4 +29,3 @@ function App() {
 }
 
 export default App;
-
