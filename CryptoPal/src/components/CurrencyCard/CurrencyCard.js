@@ -75,9 +75,6 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite, loading }) => {
 
   return (
     <div className="currency-card">
-      <div className="currency-card-header">
-        <h2>Favorite Currencies</h2>
-      </div>
       <div className="currency-card-body">
         {loading ? (
           <p className="loading-message">Loading...</p>

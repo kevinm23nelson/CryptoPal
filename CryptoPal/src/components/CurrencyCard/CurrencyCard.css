@@ -6,13 +6,8 @@
     overflow: hidden;
 }
 
-.currency-card-header {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
 .currency-card-body {
+    padding: 20px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;

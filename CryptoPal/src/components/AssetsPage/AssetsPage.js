@@ -1,4 +1,3 @@
-// AssetsPage.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loadTrades } from '../../utils/localStorage/LocalStorage';
@@ -57,9 +56,37 @@ const AssetsPage = () => {
     return change;
   };
 
+  const calculateTotalInvestment = () => {
+    return assets.reduce((total, asset) => total + asset.amountInvested, 0);
+  };
+
+  const calculateTotalAssetValue = () => {
+    return assets.reduce((total, asset) => {
+      const currentValue = asset.quantity * (currentPrices[asset.id] || 0);
+      return total + currentValue;
+    }, 0);
+  };
+
+  const calculateTotalPerformance = () => {
+    const totalInvestment = calculateTotalInvestment();
+    const totalAssetValue = calculateTotalAssetValue();
+    const performance = ((totalAssetValue - totalInvestment) / totalInvestment) * 100;
+    return performance.toFixed(2);
+  };
+
+  const totalInvestment = calculateTotalInvestment().toFixed(2);
+  const totalAssetValue = calculateTotalAssetValue().toFixed(2);
+  const totalPerformance = calculateTotalPerformance();
+
   return (
     <div className="assets-page">
       <h1 className="assets-page-header">My Assets</h1>
+      <div className="total-portfolio-performance">
+        <h2>Total Portfolio Performance</h2>
+        <p>Total Investment: ${totalInvestment}</p>
+        <p>Total Asset Value: ${totalAssetValue}</p>
+        <p>Performance: {totalPerformance}%</p>
+      </div>
       {assets.length === 0 ? (
         <p>No assets purchased yet.</p>
       ) : (
@@ -74,7 +101,7 @@ const AssetsPage = () => {
               ).toFixed(2)}</p>
               <p>Performance: ${calculatePerformance(asset.id).toFixed(2)}</p>
             </div>
-            <button className="asset-page-view-details-buton" onClick={() => handleViewTransactions(asset.id)}>View Transactions</button>
+            <button className="asset-page-view-details-button" onClick={() => handleViewTransactions(asset.id)}>View Transactions</button>
           </div>
         ))
       )}

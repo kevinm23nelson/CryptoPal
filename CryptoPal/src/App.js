@@ -7,7 +7,8 @@ import CurrencyDetailsPage from './components/CurrencyDetailsPage/CurrencyDetail
 import SideBar from './components/SideBar/SideBar';
 import TradePage from './components/TradePage/TradePage';
 import AssetsPage from './components/AssetsPage/AssetsPage';
-import AssetsPastTransactions from './components/AssetsPage/AssetsPastTransactions'; // Import the new component
+import AssetsPastTransactions from './components/AssetsPage/AssetsPastTransactions';
+import NotFoundPage from './components/NotFoundPage/NotFoundPage'; // Import the NotFoundPage component
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
               <Route path="/currency/:id" element={<CurrencyDetailsPage />} />
               <Route path="/trade" element={<TradePage />} />
               <Route path="/assets" element={<AssetsPage />} />
-              <Route path="/assets-past-transactions/:id" element={<AssetsPastTransactions />} /> {/* Add new route */}
+              <Route path="/assets-past-transactions/:id" element={<AssetsPastTransactions />} />
+              <Route path="*" element={<NotFoundPage />} /> {/* Add a catch-all route */}
             </Routes>
           </div>
         </div>

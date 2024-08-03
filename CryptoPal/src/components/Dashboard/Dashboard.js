@@ -91,7 +91,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <div className="dashboard-header">
-        <h1>Dashboard</h1>
+        <h1>Favorite Currencies</h1>
       </div>
       <div className="filter-container">
         <Filter onFilterChange={handleFilterChange} includeOneYear={true} />

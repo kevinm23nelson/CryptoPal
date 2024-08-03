@@ -31,7 +31,8 @@ const ExplorePage = () => {
   return (
     <div className="explore-page">
       <header className="explore-page-header">
-        <h1>TOP 100 CURRENCIES</h1>
+        <h1>Top 100 Currencies</h1>
+        <h2>(You can only trade favorites)</h2>
       </header>
       <SearchBar searchQuery={searchQuery} handleSearchChange={handleSearchChange} />
       <br />
