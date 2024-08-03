@@ -66,15 +66,18 @@
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .currency-list-favorite-button.favorited {
-  background-color: #f76c6c;
+  background-color: #cf4d4d;
   color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .currency-list-favorite-button:hover {
   background-color: #f0a4a4;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .view-details-button {
@@ -85,10 +88,12 @@
   cursor: pointer;
   border-radius: 4px;
   font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .view-details-button:hover {
   background-color: #0056b3;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .error-message {

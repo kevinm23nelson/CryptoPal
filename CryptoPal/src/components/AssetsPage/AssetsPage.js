@@ -37,7 +37,6 @@ const AssetsPage = () => {
         return acc;
       }, []);
 
-      // Sort assets based on their current value
       groupedAssets.sort((a, b) => {
         const aCurrentValue = a.quantity * (pricesMap[a.id] || 0);
         const bCurrentValue = b.quantity * (pricesMap[b.id] || 0);
@@ -95,7 +94,16 @@ const AssetsPage = () => {
         <p>Total Asset Value: ${totalAssetValue}</p>
         <p>
           Total Gain/Loss:{" "}
-          <span style={{ color: totalGainLoss >= 0 ? "green" : "red" }}>
+          <span
+            style={{
+              color: totalGainLoss >= 0 ? "lightgreen" : "lightcoral",
+              textShadow: "1.5px 1.5px 2px rgba(0, 0, 0, 0.9)",
+              padding: "0 15px",
+              borderRadius: "5px",
+              backgroundColor: "rgba(0, 0, 0, 0.75)",
+              fontWeight: "bold"
+            }}
+          >
             {totalGainLoss >= 0 ? "+" : "-"}${Math.abs(totalGainLoss)}
           </span>
         </p>

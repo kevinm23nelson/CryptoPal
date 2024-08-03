@@ -80,7 +80,7 @@ describe('ExplorePage', () => {
         });
       });
 
-      // Now toggle back to "Favorite"
+     
       cy.contains('.currency-list-item', 'TRON')
         .find('.currency-list-favorite-button')
         .click();
@@ -89,10 +89,7 @@ describe('ExplorePage', () => {
         .find('.currency-list-favorite-button')
         .should('contain.text', 'Favorite');
 
-      // Wait to ensure state changes are applied
-     
-
-      // Check local storage again to ensure TRON is removed
+    
       cy.window().then((win) => {
         const favoriteCurrencies = JSON.parse(win.localStorage.getItem('favoriteCurrencies'));
         expect(favoriteCurrencies).to.not.deep.include({
