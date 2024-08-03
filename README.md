@@ -53,6 +53,7 @@ Multiple Screen Sizes
 ## Tablet View
 
 <img width="674" alt="Screenshot 2024-08-03 at 2 47 57 AM" src="https://github.com/user-attachments/assets/7b8655f6-fda4-40be-976c-e5bb785e9b48">
+
 ## Mobile View
 
 <img width="608" alt="Screenshot 2024-08-03 at 2 47 42 AM" src="https://github.com/user-attachments/assets/8043a4f7-7b01-44da-ac8f-96cadc1126ce">
