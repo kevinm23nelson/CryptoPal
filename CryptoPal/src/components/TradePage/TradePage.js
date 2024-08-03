@@ -22,9 +22,10 @@ const TradePage = () => {
     
     trades.forEach((trade) => {
       if (!quantities[trade.id]) {
-        quantities[trade.id] = 0;
+        quantities[trade.id] = { quantity: 0, priceUsd: trade.priceUsd }; // Store priceUsd along with quantity
       }
-      quantities[trade.id] += trade.quantity;
+      quantities[trade.id].quantity += trade.quantity;
+      quantities[trade.id].priceUsd = trade.priceUsd; // Update priceUsd with the latest price
     });
     
     setOwnedQuantities(quantities);
@@ -70,7 +71,8 @@ const TradePage = () => {
 
   const handleSell = (currency) => {
     const quantityToSell = parseFloat(sellAmounts[currency.id] || 0);
-    const ownedQuantity = ownedQuantities[currency.id] || 0;
+    const owned = ownedQuantities[currency.id] || { quantity: 0, priceUsd: currency.priceUsd };
+    const ownedQuantity = owned.quantity;
 
     if (quantityToSell > 0 && quantityToSell <= ownedQuantity) {
       const amount = quantityToSell * parseFloat(currency.priceUsd);
@@ -125,39 +127,46 @@ const TradePage = () => {
       {favorites.length === 0 ? (
         <p>No favorite currencies available for trading. Go "Favorite" some on the Explore page to start trading!</p>
       ) : (
-        getFilteredFavorites().map((currency) => (
-          <div key={currency.id} className="trade-card">
-            <h2>{currency.name} ({currency.symbol})</h2>
-            <div className="currency-info">
-              <p>Rank: {currency.rank}</p>
-              <p>Price: ${parseFloat(currency.priceUsd).toFixed(2)}</p>
-              <p>24 Hr Change: {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
+        getFilteredFavorites().map((currency) => {
+          const owned = ownedQuantities[currency.id] || { quantity: 0, priceUsd: currency.priceUsd };
+          const ownedQuantity = owned.quantity;
+          const ownedValueInUsd = ownedQuantity * parseFloat(currency.priceUsd);
+
+          return (
+            <div key={currency.id} className="trade-card">
+              <h2>{currency.name} ({currency.symbol})</h2>
+              <div className="currency-info">
+                <p>Rank: {currency.rank}</p>
+                <p>Price: ${parseFloat(currency.priceUsd).toFixed(2)}</p>
+                <p>24 Hr Change: {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
+              </div>
+              <label>
+                Amount to Invest in USD ($):
+                <input
+                  type="number"
+                  value={investments[currency.id] || ''}
+                  onChange={(e) => handleInputChange(e, currency.id)}
+                />
+              </label>
+              <p>Quantity of Coin you will purchase: {(investments[currency.id] / parseFloat(currency.priceUsd) || 0).toFixed(6)}</p>
+              <button onClick={() => handleBuy(currency)}>Buy</button>
+              <div className="currency-info-two">
+                <p>Owned Quantity of this Coin: {ownedQuantity.toFixed(6)}</p>
+                <p>Owned Quantity of this Coin in USD: ${ownedValueInUsd.toFixed(2)}</p>
+              </div>
+              <label>
+                Quantity of Coin to Sell:
+                <input
+                  type="number"
+                  value={sellAmounts[currency.id] || ''}
+                  onChange={(e) => handleSellInputChange(e, currency.id)}
+                />
+              </label>
+              <p>Quantity of USD ($) you will receive: ${(parseFloat(sellAmounts[currency.id] || 0) * parseFloat(currency.priceUsd)).toFixed(2)}</p>
+              <button onClick={() => handleSell(currency)}>Sell</button>
             </div>
-            <label>
-              Amount to Invest in USD ($):
-              <input
-                type="number"
-                value={investments[currency.id] || ''}
-                onChange={(e) => handleInputChange(e, currency.id)}
-              />
-            </label>
-            <p>Quantity of Coin you will purchase: {(investments[currency.id] / parseFloat(currency.priceUsd) || 0).toFixed(6)}</p>
-            <button onClick={() => handleBuy(currency)}>Buy</button>
-            <div className="currency-info-two">
-              <p>Owned Quantity of this Coin: {ownedQuantities[currency.id] ? ownedQuantities[currency.id].toFixed(6) : 0}</p>
-            </div>
-            <label>
-              Quantity of Coin to Sell:
-              <input
-                type="number"
-                value={sellAmounts[currency.id] || ''}
-                onChange={(e) => handleSellInputChange(e, currency.id)}
-              />
-            </label>
-            <p>Quantity of USD ($) you will receive: ${(parseFloat(sellAmounts[currency.id] || 0) * parseFloat(currency.priceUsd)).toFixed(2)}</p>
-            <button onClick={() => handleSell(currency)}>Sell</button>
-          </div>
-        ))
+          );
+        })
       )}
     </div>
   );
