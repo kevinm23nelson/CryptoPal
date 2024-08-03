@@ -2,48 +2,54 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loadTrades } from '../../utils/localStorage/LocalStorage';
 import { getCurrencyById } from '../../utils/api/apiCalls';
+import ConfirmationModal from '../../components/Modals/ConfirmationModals/ConfirmationModal';
 import './AssetsPage.css';
 
 const AssetsPage = () => {
   const [assets, setAssets] = useState([]);
   const [currentPrices, setCurrentPrices] = useState({});
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPrices = async () => {
       const trades = loadTrades();
       const assetIds = [...new Set(trades.map(trade => trade.id))];
-
-      const prices = await Promise.all(assetIds.map(async (id) => {
-        const data = await getCurrencyById(id);
-        return { id, priceUsd: parseFloat(data.priceUsd) };
-      }));
-
-      const pricesMap = prices.reduce((acc, { id, priceUsd }) => {
-        acc[id] = priceUsd;
-        return acc;
-      }, {});
-
-      setCurrentPrices(pricesMap);
-
-      const groupedAssets = trades.reduce((acc, trade) => {
-        const existingAsset = acc.find(asset => asset.id === trade.id);
-        if (existingAsset) {
-          existingAsset.amountInvested += trade.amountInvested;
-          existingAsset.quantity += trade.quantity;
-        } else {
-          acc.push({ ...trade });
-        }
-        return acc;
-      }, []);
-
-      groupedAssets.sort((a, b) => {
-        const aCurrentValue = a.quantity * (pricesMap[a.id] || 0);
-        const bCurrentValue = b.quantity * (pricesMap[b.id] || 0);
-        return bCurrentValue - aCurrentValue;
-      });
-
-      setAssets(groupedAssets);
+    
+      try {
+        const prices = await Promise.all(assetIds.map(async (id) => {
+          const data = await getCurrencyById(id);
+          return data && data.priceUsd ? { id, priceUsd: parseFloat(data.priceUsd) } : null;
+        }));
+    
+        const pricesMap = prices.reduce((acc, { id, priceUsd }) => {
+          if (id && priceUsd) acc[id] = priceUsd;
+          return acc;
+        }, {});
+    
+        setCurrentPrices(pricesMap);
+    
+        const groupedAssets = trades.reduce((acc, trade) => {
+          const existingAsset = acc.find(asset => asset.id === trade.id);
+          if (existingAsset) {
+            existingAsset.amountInvested += trade.amountInvested;
+            existingAsset.quantity += trade.quantity;
+          } else {
+            acc.push({ ...trade });
+          }
+          return acc;
+        }, []);
+    
+        groupedAssets.sort((a, b) => {
+          const aCurrentValue = a.quantity * (pricesMap[a.id] || 0);
+          const bCurrentValue = b.quantity * (pricesMap[b.id] || 0);
+          return bCurrentValue - aCurrentValue;
+        });
+    
+        setAssets(groupedAssets);
+      } catch (error) {
+        console.error("Failed to fetch prices:", error);
+      }
     };
 
     fetchPrices();
@@ -80,6 +86,21 @@ const AssetsPage = () => {
     return performance.toFixed(2);
   };
 
+  const handleResetTrades = () => {
+    setShowModal(true);
+  };
+
+  const confirmResetTrades = () => {
+    localStorage.removeItem('trades');
+    setAssets([]);
+    setCurrentPrices({});
+    setShowModal(false);
+  };
+
+  const cancelResetTrades = () => {
+    setShowModal(false);
+  };
+
   const totalInvestment = calculateTotalInvestment().toFixed(2);
   const totalAssetValue = calculateTotalAssetValue().toFixed(2);
   const totalPerformance = calculateTotalPerformance();
@@ -87,8 +108,18 @@ const AssetsPage = () => {
 
   return (
     <div className="assets-page">
+      {showModal && (
+        <ConfirmationModal
+          message="Are you sure you want to reset your trades?"
+          onConfirm={confirmResetTrades}
+          onCancel={cancelResetTrades}
+        />
+      )}
       <h1 className="assets-page-header">My Assets</h1>
       <div className="total-portfolio-performance">
+        <button className="reset-trades-button" onClick={handleResetTrades}>
+          Reset All Trades!
+        </button>
         <h2>Total Portfolio Performance</h2>
         <p>Total Investment: ${totalInvestment}</p>
         <p>Total Asset Value: ${totalAssetValue}</p>
