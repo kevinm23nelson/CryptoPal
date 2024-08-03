@@ -10,27 +10,27 @@
 
 .assets-page-detailed-view-header,
 .total-performance-header {
-    background-color: #5da251; /* Green background */
-    color: #ffffff; /* White text for better contrast */
+    background-color: #5da251; 
+    color: #ffffff; 
     padding: 10px;
     border-radius: 10px;
-    font-size: 2em; /* Keeping the font size as is */
+    font-size: 2em; 
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Increased text shadow for better contrast */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
 }
 
 .total-performance-header {
-    background-color: #5da251; /* Green background */
-    color: #ffffff; /* White text for better contrast */
+    background-color: #5da251; 
+    color: #ffffff; 
     padding: 10px;
     border-radius: 10px;
-    font-size: 1.2em; /* Keeping the font size as is */
+    font-size: 1.2em; 
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Increased text shadow for better contrast */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
 }
 
 

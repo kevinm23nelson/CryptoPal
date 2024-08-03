@@ -24,7 +24,7 @@ function App() {
               <Route path="/trade" element={<TradePage />} />
               <Route path="/assets" element={<AssetsPage />} />
               <Route path="/assets-past-transactions/:id" element={<AssetsPastTransactions />} />
-              <Route path="*" element={<NotFoundPage />} /> {/* Add a catch-all route */}
+              <Route path="*" element={<NotFoundPage />} /> {/* catch-all route */}
             </Routes>
           </div>
         </div>
