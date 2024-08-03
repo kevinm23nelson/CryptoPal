@@ -46,15 +46,24 @@ Developed a responsive design that works well across various devices, ensuring a
 
 ## Screenshots:
 Multiple Screen Sizes
-## Desktop View
+### Desktop View
 
 <img width="1393" alt="Screenshot 2024-08-03 at 2 51 57 AM" src="https://github.com/user-attachments/assets/c6041a6c-4ad2-4163-9691-d4bbbcb93f1e">
 
-## Tablet View
+### Tablet View
 
 <img width="674" alt="Screenshot 2024-08-03 at 2 47 57 AM" src="https://github.com/user-attachments/assets/7b8655f6-fda4-40be-976c-e5bb785e9b48">
 
-## Mobile View
+### Mobile View
 
 <img width="608" alt="Screenshot 2024-08-03 at 2 47 42 AM" src="https://github.com/user-attachments/assets/8043a4f7-7b01-44da-ac8f-96cadc1126ce">
+
+## Lighthouse Score and Accessibility
+
+<img width="1473" alt="Screenshot 2024-08-03 at 3 17 17 PM" src="https://github.com/user-attachments/assets/ad5609fd-50ee-41c8-ad47-318efe325c69">
+
+<img width="1468" alt="Screenshot 2024-08-03 at 3 32 29 PM" src="https://github.com/user-attachments/assets/063093cc-f097-489b-8efd-80e57d8a2d75">
+
+<img width="1295" alt="Screenshot 2024-08-03 at 3 33 25 PM" src="https://github.com/user-attachments/assets/25a1a111-1552-46bf-9899-76769a957217">
+
 
