@@ -6,24 +6,32 @@ import './CurrencyCard.css';
 import arrowUp from '../../images/elevator-arrow-up.webp';
 
 export const calculateOneYearPerformance = (historicalData) => {
+  console.log('Calculating one year performance for historical data:', historicalData);
 
   if (historicalData.length === 0) {
+    console.log('No historical data available.');
     return { percentageChange: 0 };
   }
 
   const oneYearAgo = new Date();
   oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+  console.log('One year ago date:', oneYearAgo);
 
   const recentData = historicalData.filter(dataPoint => new Date(dataPoint.time) >= oneYearAgo);
+  console.log('Filtered recent data:', recentData);
 
   if (recentData.length < 2) {
+    console.log('Not enough data points for one year performance calculation.');
     return { percentageChange: 0 };
   }
 
   const earliestData = recentData[0];
   const latestData = recentData[recentData.length - 1];
+  console.log('Earliest data point:', earliestData);
+  console.log('Latest data point:', latestData);
 
   const percentageChange = ((latestData.priceUsd - earliestData.priceUsd) / earliestData.priceUsd) * 100;
+  console.log('Calculated percentage change:', percentageChange.toFixed(2));
 
   return { percentageChange: percentageChange.toFixed(2) };
 };
@@ -48,6 +56,7 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite, loading }) => {
           changes[id] = oneYearPerformance.percentageChange;
         });
         setOneYearChanges(changes);
+        console.log('One year changes:', changes);
       } catch (error) {
         console.error('Error fetching historical data:', error);
       }
