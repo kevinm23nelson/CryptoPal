@@ -77,26 +77,29 @@ const AssetsPage = () => {
   const calculateTotalPerformance = () => {
     const totalInvestment = calculateTotalInvestment();
     const totalAssetValue = calculateTotalAssetValue();
-
-    if (totalInvestment === 0) return 0; // Avoid division by zero
-
     const performance = ((totalAssetValue - totalInvestment) / totalInvestment) * 100;
     return performance.toFixed(2);
   };
+
+  const totalInvestment = calculateTotalInvestment().toFixed(2);
+  const totalAssetValue = calculateTotalAssetValue().toFixed(2);
+  const totalPerformance = calculateTotalPerformance();
+  const totalGainLoss = (totalAssetValue - totalInvestment).toFixed(2);
 
   return (
     <div className="assets-page">
       <h1 className="assets-page-header">My Assets</h1>
       <div className="total-portfolio-performance">
         <h2>Total Portfolio Performance</h2>
-        <p>Total Investment: ${calculateTotalInvestment().toFixed(2)}</p>
-        <p>Total Asset Value: ${calculateTotalAssetValue().toFixed(2)}</p>
+        <p>Total Investment: ${totalInvestment}</p>
+        <p>Total Asset Value: ${totalAssetValue}</p>
         <p>
           Total Gain/Loss:{" "}
-          <span style={{ color: calculateTotalPerformance() >= 0 ? "green" : "red" }}>
-            {calculateTotalPerformance() >= 0 ? "+" : "-"}${Math.abs(calculateTotalPerformance())}
+          <span style={{ color: totalGainLoss >= 0 ? "green" : "red" }}>
+            {totalGainLoss >= 0 ? "+" : "-"}${Math.abs(totalGainLoss)}
           </span>
         </p>
+        <p>Percentage Change: {totalPerformance}%</p>
       </div>
       <h1 className="assets-page-description">
         Coins you own. Ranked by current value.
