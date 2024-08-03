@@ -44,16 +44,16 @@ Successfully integrated Cypress for end-to-end testing, enhancing the reliabilit
 Efficiently implemented the favorite/unfavorite feature with local storage, providing a seamless user experience.
 Developed a responsive design that works well across various devices, ensuring accessibility for all users.
 
-##Screenshots:
+## Screenshots:
 Multiple Screen Sizes
-##Desktop View
+## Desktop View
 
 <img width="1393" alt="Screenshot 2024-08-03 at 2 51 57 AM" src="https://github.com/user-attachments/assets/c6041a6c-4ad2-4163-9691-d4bbbcb93f1e">
 
-##Tablet View
+## Tablet View
 
 <img width="674" alt="Screenshot 2024-08-03 at 2 47 57 AM" src="https://github.com/user-attachments/assets/7b8655f6-fda4-40be-976c-e5bb785e9b48">
-##Mobile View
+## Mobile View
 
 <img width="608" alt="Screenshot 2024-08-03 at 2 47 42 AM" src="https://github.com/user-attachments/assets/8043a4f7-7b01-44da-ac8f-96cadc1126ce">
 
