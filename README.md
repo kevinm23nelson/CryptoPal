@@ -70,4 +70,7 @@ Multiple Screen Sizes
 
 <img width="1333" alt="Screenshot 2024-08-03 at 4 48 10 PM" src="https://github.com/user-attachments/assets/fe493d1f-0ef4-46d5-9641-0c35d09d73cc">
 
-
+## Acknowledgements
+- [Turing](https://turing.edu/) for education.
+- [React.dev](https://react.dev/) for React documentation.
+- [Cypress Docs](https://docs.cypress.io/) for Cypress training and documentation.
