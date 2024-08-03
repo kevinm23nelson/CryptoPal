@@ -17,7 +17,11 @@ export const calculateOneYearPerformance = (historicalData) => {
   oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
   console.log('One year ago date:', oneYearAgo);
 
-  const recentData = historicalData.filter(dataPoint => new Date(dataPoint.time) >= oneYearAgo);
+  const recentData = historicalData.filter(dataPoint => {
+    const dataDate = new Date(dataPoint.time);
+    console.log('Data point date:', dataDate);
+    return dataDate >= oneYearAgo;
+  });
   console.log('Filtered recent data:', recentData);
 
   if (recentData.length < 2) {
@@ -45,9 +49,15 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite, loading }) => {
       const changes = {};
 
       const historicalDataPromises = favorites.map(async (currency) => {
-        const historicalData = await getHistoricalData(currency.id);
-        const oneYearPerformance = calculateOneYearPerformance(historicalData);
-        return { id: currency.id, oneYearPerformance };
+        try {
+          const historicalData = await getHistoricalData(currency.id);
+          console.log(`Historical data for ${currency.id}:`, historicalData);
+          const oneYearPerformance = calculateOneYearPerformance(historicalData);
+          return { id: currency.id, oneYearPerformance };
+        } catch (error) {
+          console.error(`Error fetching historical data for ${currency.id}:`, error);
+          return { id: currency.id, oneYearPerformance: { percentageChange: 0 } };
+        }
       });
 
       try {

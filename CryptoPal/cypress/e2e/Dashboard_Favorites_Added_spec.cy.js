@@ -1,5 +1,8 @@
 describe('Dashboard with Favorites', () => {
   beforeEach(() => {
+    const date = new Date('2024-07-30T00:00:00.000Z');
+    cy.clock(date.getTime());
+
     cy.setupCurrencyIntercepts();
     const favoriteCurrencies = [
       {
@@ -75,22 +78,22 @@ describe('Dashboard with Favorites', () => {
       cy.get('.currency-price').should('contain.text', 'Price: $6,931.51');
       cy.get('.currency-change').should('contain.text', 'Change (24hr): -0.81%');
       cy.get('.currency-market-cap').should('contain.text', 'Market Cap: $119,179,791,817.67');
-      cy.get('.currency-year-change').should('contain.text', 'Change (1 year): 125.56%')
-      cy.get('.favorite-button').contains('Remove Favorite').should('exist')
-      cy.get('.dashboard-view-details-button').contains('View Details').should('exist')
+      cy.get('.currency-year-change').should('contain.text', 'Change (1 year): 125.56%');
+      cy.get('.favorite-button').contains('Remove Favorite').should('exist');
+      cy.get('.dashboard-view-details-button').contains('View Details').should('exist');
     });
   });
 
   it('Should display correct details for the TRON card', () => {
     cy.contains('.currency-card', 'TRON').within(() => {
-      cy.get('.currency-header').should('contain.text', 'TRON(TRX)');
+      cy.get('.currency-header').should('contain.text', 'TRON (TRX)');
       cy.get('.currency-rank').should('contain.text', 'Rank: 10');
       cy.get('.currency-price').should('contain.text', 'Price: $117.05');
       cy.get('.currency-change').should('contain.text', 'Change (24hr): 5.03%');
       cy.get('.currency-market-cap').should('contain.text', 'Market Cap: $72,116,102.54');
-      cy.get('.currency-year-change').should('contain.text', 'Change (1 year): 74.80%')
-      cy.get('.favorite-button').contains('Remove Favorite').should('exist')
-      cy.get('.dashboard-view-details-button').contains('View Details').should('exist')
+      cy.get('.currency-year-change').should('contain.text', 'Change (1 year): 74.80%');
+      cy.get('.favorite-button').contains('Remove Favorite').should('exist');
+      cy.get('.dashboard-view-details-button').contains('View Details').should('exist');
     });
   });
 
@@ -105,21 +108,18 @@ describe('Dashboard with Favorites', () => {
   });
 
   it('Should remove Bitcoin from favorites and update Dashboard', () => {
-    // Click "Remove Favorite" for Bitcoin
     cy.contains('.currency-card', 'Bitcoin').within(() => {
       cy.get('.favorite-button').contains('Remove Favorite').click();
     });
 
-    // Verify that Bitcoin is removed from the Dashboard
     cy.contains('.currency-card', 'Bitcoin').should('not.exist');
   });
 
   it('Should verify Bitcoin is removed from Local Storage', () => {
-    // Click "Remove Favorite" for Bitcoin
     cy.contains('.currency-card', 'Bitcoin').within(() => {
       cy.get('.favorite-button').contains('Remove Favorite').click();
     });
-    cy.wait(1000); // Adjust the delay if needed
+    cy.wait(1000); 
     cy.window().then((win) => {
       const favoriteCurrencies = JSON.parse(win.localStorage.getItem('favoriteCurrencies'));
       expect(favoriteCurrencies).to.not.deep.include({
@@ -137,5 +137,5 @@ describe('Dashboard with Favorites', () => {
       });
     });
   });
-  
 });
+
