@@ -2,7 +2,7 @@
 CryptoPal is a web application designed to help users explore and simulate investments in the top 100 cryptocurrencies. Tailored for individuals who want to gain hands-on experience with cryptocurrency trading without financial risk, CryptoPal offers a safe environment for practicing investing. Users can view detailed information on each cryptocurrency, manage their favorites, and utilize various filters to find currencies that meet their criteria. With CryptoPal, you can confidently learn and practice cryptocurrency investing before committing real money.
 
 ## Visit the Application Deployed on Vercel!
-[Deployed CryptoPal!](../crypto-pal-rs14-k93cy7pjy-kevin-nelsons-projects.vercel.app)
+[Deployed CryptoPal!](./crypto-pal-rs14-k93cy7pjy-kevin-nelsons-projects.vercel.app)
 
 ## Features
 - Display a list of the top 100 cryptocurrencies with details like name, symbol, rank, price, and 24-hour change.
