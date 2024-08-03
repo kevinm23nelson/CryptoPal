@@ -21,7 +21,7 @@ CryptoPal is a web application designed to help users explore and simulate inves
 To run this project locally, follow these steps:
 
 1. **Clone the repository**
-    by running ```git clone https://github.com/kevinm23nelson/cryptopal/cryptopal```
+    by running ```git clone https://github.com/kevinm23nelson/cryptopal```
 2. **Navigate into the project directory**
    by running ```cd cryptopal```
 3. **Install dependencies**
