@@ -43,6 +43,8 @@ Dynamic styling based on real-time data changes and ensuring CSS classes are app
 Successfully integrated Cypress for end-to-end testing, enhancing the reliability of the application.
 Efficiently implemented the favorite/unfavorite feature with local storage, providing a seamless user experience.
 Developed a responsive design that works well across various devices, ensuring accessibility for all users.
+## Future Feature
+A future feature that I would love to implement would be for the application to properly handle the selling of currencies and to be able to factor the impact of that sale (currencies price that day compared to the prices of past transactions where you bought that currency) and be able to factor sales into the total portfolio performance.
 
 ## Screenshots:
 Multiple Screen Sizes
