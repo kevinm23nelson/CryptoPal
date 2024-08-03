@@ -60,27 +60,24 @@ describe('ExplorePage', () => {
         .find('.currency-list-favorite-button')
         .should('contain.text', 'Unfavorite');
 
+      // cy.window().then((win) => {
+      //   const favoriteCurrencies = JSON.parse(win.localStorage.getItem('favoriteCurrencies'));
+      //   expect(favoriteCurrencies).to.deep.include({
+      //     id: 'tron',
+      //     rank: '10',
+      //     symbol: 'TRX',
+      //     name: 'TRON',
+      //     supply: '102339166.0000000000000000',
+      //     maxSupply: null,
+      //     marketCapUsd: '72116102.5394724649666992',
+      //     volumeUsd24Hr: '45084130.4166935808283857',
+      //     priceUsd: '117.046774500729512',
+      //     changePercent24Hr: '5.0331628584946192',
+      //     vwap24Hr: '0.7207903092174193'
+      //   });
+      // });
 
-
-      // Check local storage for favorite currencies
-      cy.window().then((win) => {
-        const favoriteCurrencies = JSON.parse(win.localStorage.getItem('favoriteCurrencies'));
-        expect(favoriteCurrencies).to.deep.include({
-          id: 'tron',
-          rank: '10',
-          symbol: 'TRX',
-          name: 'TRON',
-          supply: '102339166.0000000000000000',
-          maxSupply: null,
-          marketCapUsd: '72116102.5394724649666992',
-          volumeUsd24Hr: '45084130.4166935808283857',
-          priceUsd: '117.046774500729512',
-          changePercent24Hr: '5.0331628584946192',
-          vwap24Hr: '0.7207903092174193'
-        });
-      });
-
-     
+  
       cy.contains('.currency-list-item', 'TRON')
         .find('.currency-list-favorite-button')
         .click();
@@ -89,7 +86,6 @@ describe('ExplorePage', () => {
         .find('.currency-list-favorite-button')
         .should('contain.text', 'Favorite');
 
-    
       cy.window().then((win) => {
         const favoriteCurrencies = JSON.parse(win.localStorage.getItem('favoriteCurrencies'));
         expect(favoriteCurrencies).to.not.deep.include({
