@@ -7,7 +7,7 @@ import CurrencyDetailsPage from './components/CurrencyDetailsPage/CurrencyDetail
 import SideBar from './components/SideBar/SideBar';
 import TradePage from './components/TradePage/TradePage';
 import AssetsPage from './components/AssetsPage/AssetsPage';
-import AssetsPastTransactions from './components/AssetsPage/AssetsPastTransactions.js'; // Import the new component
+import AssetsPastTransactions from './components/AssetsPage/AssetsPastTransactions'; // Import the new component
 
 function App() {
   return (

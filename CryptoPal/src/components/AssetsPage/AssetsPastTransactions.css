@@ -1,0 +1,119 @@
+/* AssetsPastTransactions.css */
+.assets-page-detailed-view {
+    padding-left: 40px;
+    font-family: Arial, sans-serif;
+}
+
+.assets-page-detailed-view h2 {
+    margin-bottom: 20px;
+}
+
+.total-performance p {
+    margin: 0 10px;
+    padding: 5px;
+    border: 1px solid #cbcbcb;
+    border-radius: 3px;
+    background-color: #ffffffd6;
+}
+
+.assets-page-detailed-view-header {
+    background-color: #6fb762;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 2em;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.back-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+.total-performance {
+    margin-bottom: 20px;
+}
+
+.total-performance h3 {
+    margin: 0;
+}
+
+.total-performance p {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    border: 1px solid #858585;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #ffffffe9;
+}
+
+table td {
+    background-color: #ffffff5f;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .assets-page-detailed-view h2 {
+        font-size: 20px;
+    }
+
+    .total-performance p {
+        font-size: 16px;
+    }
+
+    table th,
+    table td {
+        font-size: 14px;
+    }
+
+    .back-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .assets-page-detailed-view h2 {
+        font-size: 18px;
+    }
+
+    .total-performance p {
+        font-size: 14px;
+    }
+
+    table th,
+    table td {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .back-button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+}

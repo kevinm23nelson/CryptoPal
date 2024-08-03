@@ -1,99 +1,83 @@
 // AssetsPage.js
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { loadTrades } from '../../utils/localStorage/LocalStorage';
-import { getCurrencyById } from '../../utils/api/apiCalls'; // Assuming you have an API call to get the latest currency data
+import { getCurrencyById } from '../../utils/api/apiCalls';
 import './AssetsPage.css';
 
 const AssetsPage = () => {
   const [assets, setAssets] = useState([]);
-  const [detailedView, setDetailedView] = useState(null);
+  const [currentPrices, setCurrentPrices] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const trades = loadTrades();
-    const aggregatedAssets = trades.reduce((acc, trade) => {
-      if (!acc[trade.id]) {
-        acc[trade.id] = { ...trade, totalInvested: 0, totalQuantity: 0, transactions: [] };
-      }
-      acc[trade.id].totalInvested += trade.amountInvested;
-      acc[trade.id].totalQuantity += trade.quantity;
-      acc[trade.id].transactions.push(trade);
-      return acc;
-    }, {});
-    setAssets(Object.values(aggregatedAssets));
+    const fetchPrices = async () => {
+      const trades = loadTrades();
+      const assetIds = [...new Set(trades.map(trade => trade.id))];
+
+      const prices = await Promise.all(assetIds.map(async (id) => {
+        const data = await getCurrencyById(id);
+        return { id, priceUsd: parseFloat(data.priceUsd) };
+      }));
+
+      const pricesMap = prices.reduce((acc, { id, priceUsd }) => {
+        acc[id] = priceUsd;
+        return acc;
+      }, {});
+
+      setCurrentPrices(pricesMap);
+
+      const groupedAssets = trades.reduce((acc, trade) => {
+        const existingAsset = acc.find(asset => asset.id === trade.id);
+        if (existingAsset) {
+          existingAsset.amountInvested += trade.amountInvested;
+          existingAsset.quantity += trade.quantity;
+        } else {
+          acc.push({ ...trade });
+        }
+        return acc;
+      }, []);
+
+      setAssets(groupedAssets);
+    };
+
+    fetchPrices();
   }, []);
 
-  const handleViewTransactions = (assetId) => {
-    setDetailedView(assets.find(asset => asset.id === assetId));
+  const handleViewTransactions = (id) => {
+    navigate(`/assets-past-transactions/${id}`);
   };
 
-  const handleCloseDetails = () => {
-    setDetailedView(null);
+  const calculatePerformance = (id) => {
+    const asset = assets.find(a => a.id === id);
+    if (!asset || !currentPrices[id]) return 0;
+
+    const currentValue = asset.quantity * currentPrices[id];
+    const change = currentValue - asset.amountInvested;
+    return change;
   };
 
   return (
     <div className="assets-page">
-      <h1>My Assets</h1>
+      <h1 className="assets-page-header">My Assets</h1>
       {assets.length === 0 ? (
         <p>No assets purchased yet.</p>
       ) : (
         assets.map((asset) => (
           <div key={asset.id} className="asset-card">
             <h2>{asset.name} ({asset.symbol})</h2>
-            <p>Amount Invested: ${asset.totalInvested.toFixed(2)}</p>
-            <p>Quantity: {asset.totalQuantity.toFixed(6)}</p>
-            <p>Current Value: ${(asset.totalQuantity * parseFloat(asset.priceUsd)).toFixed(2)}</p>
-            <button className="view-details-button" onClick={() => handleViewTransactions(asset.id)}>View Transactions</button>
+            <div className="asset-info">
+              <p>Total Amount Invested: ${asset.amountInvested.toFixed(2)}</p>
+              <p>Quantity of Currency you Own: {asset.quantity.toFixed(6)}</p>
+              <p>Current Value: ${(
+                asset.quantity * (currentPrices[asset.id] || 0)
+              ).toFixed(2)}</p>
+              <p>Performance: ${calculatePerformance(asset.id).toFixed(2)}</p>
+            </div>
+            <button className="asset-page-view-details-buton" onClick={() => handleViewTransactions(asset.id)}>View Transactions</button>
           </div>
         ))
       )}
-      {detailedView && <DetailedView asset={detailedView} onClose={handleCloseDetails} />}
-    </div>
-  );
-};
-
-const DetailedView = ({ asset, onClose }) => {
-  const [currentPrice, setCurrentPrice] = useState(asset.priceUsd);
-
-  useEffect(() => {
-    const fetchCurrentPrice = async () => {
-      const data = await getCurrencyById(asset.id);
-      setCurrentPrice(data.priceUsd);
-    };
-    fetchCurrentPrice();
-  }, [asset.id]);
-
-  return (
-    <div className="detailed-view">
-      <h2>{asset.name} ({asset.symbol}) Transactions</h2>
-      <button className="close-details-button" onClick={onClose}>Close</button>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Amount Invested</th>
-            <th>Quantity</th>
-            <th>Current Value</th>
-            <th>Change</th>
-          </tr>
-        </thead>
-        <tbody>
-          {asset.transactions.map((transaction, index) => {
-            const currentValue = transaction.quantity * parseFloat(currentPrice);
-            const change = currentValue - transaction.amountInvested;
-            return (
-              <tr key={index}>
-                <td>{new Date(transaction.date).toLocaleDateString()}</td>
-                <td>${transaction.amountInvested.toFixed(2)}</td>
-                <td>{transaction.quantity.toFixed(6)}</td>
-                <td>${currentValue.toFixed(2)}</td>
-                <td style={{ color: change >= 0 ? 'green' : 'red' }}>
-                  ${change.toFixed(2)}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
     </div>
   );
 };

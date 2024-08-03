@@ -1,11 +1,21 @@
 /* AssetsPage.css */
 .assets-page {
-    padding: 20px;
+    padding-left: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  
+  .assets-page-header {
+    background-color: #6fb762; 
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 2em; 
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    margin-bottom: 20px; 
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
   .asset-card {
     border: 1px solid #ddd;
     padding: 15px;
@@ -16,7 +26,22 @@
     width: 80%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
-  
+
+  .asset-info {
+  justify-content: space-between;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+  margin-top: 10px;
+  }
+
+  .asset-info p {
+    margin: 0 10px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #fff;
+  }
+
   .asset-card:hover {
     transform: translateY(-5px);
   }
@@ -32,16 +57,21 @@
     margin: 5px 0;
   }
 
-  .view-details-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .view-details-button:hover {
-    background-color: #0056b3;
-  }
+  /* Shared button styles for action buttons */
+
+.asset-page-view-details-buton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.asset-page-view-details-buton:hover {
+  background-color: #0056b3;
+}
+
   

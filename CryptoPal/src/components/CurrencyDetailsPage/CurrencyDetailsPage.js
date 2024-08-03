@@ -41,7 +41,7 @@ const CurrencyDetailsPage = () => {
         <p className="error-message">{errorMessage}</p>
       ) : currency ? (
         <div className="currency-view-details">
-          <div className={`currency-header ${performanceClass}`}>
+          <div className={`currency-view-details-header ${performanceClass}`}>
             <p>Coin: {currency.name}</p>
             <p className="currency-symbol">Symbol: {currency.symbol}</p>
           </div>

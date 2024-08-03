@@ -66,7 +66,7 @@ const TradePage = () => {
 
   return (
     <div className="trade-page">
-      <h1>Trade Your Favorite Currencies</h1>
+      <h1 className="trade-page-header">Trade Your Favorite Currencies</h1>
       <div className="filter-container">
         <Filter onFilterChange={handleFilterChange} includeOneYear={false} />
       </div>
