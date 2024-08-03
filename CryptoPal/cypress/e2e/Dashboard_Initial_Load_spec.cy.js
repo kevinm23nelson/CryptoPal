@@ -5,7 +5,7 @@ describe('Dashboard', () => {
   });
 
   it('displays the dashboard correctly', () => {
-    cy.get('.dashboard-header').should('contain.text', 'Dashboard');
+    cy.get('.dashboard-header').should('contain.text', 'Favorite Currencies');
     cy.get('.filter-select').within(() => {
       cy.get('option').eq(0).should('have.text', 'Default (Rank/MarketCap)').and('have.value', 'rank');
       cy.get('option').eq(1).should('have.text', 'Change Up (24hr +)').and('have.value', '24hrpositive');
@@ -14,7 +14,6 @@ describe('Dashboard', () => {
     });
 
     cy.get('.currency-card').within(() => {
-      cy.get('.currency-card-header').should('contain.text', 'Favorite Currencies');
       cy.get('.currency-card-body').within(() => {
         cy.get('.no-favorites-message').should('contain.text', 'No favorites selected. Go to the "Explore" page!');
       });

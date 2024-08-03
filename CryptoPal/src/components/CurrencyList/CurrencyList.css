@@ -4,6 +4,27 @@
   gap: 10px;
 }
 
+.performance-arrow {
+  width: 30px;
+  height: auto;
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+
+.flipped {
+  transform: rotate(180deg);
+}
+
+.currency-list-header {
+  background-color: #eee;
+  padding: 3px;
+  border-radius: 5px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .currency-list-item {
   border: 1px solid #ddd;
   padding: 10px;
@@ -17,22 +38,24 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.currency-header {
-  background-color: #eee;
-  padding: 5px;
-  border-radius: 5px;
-  font-weight: bold;
-}
-
 .explore-currency-details {
   display: flex;
   justify-content: space-between;
-  padding: 5px 0;
+  padding-top: 8px;
+}
+.explore-currency-details p {
+  margin: 0 10px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background-color: #fff;
 }
 
-.button-container {
+.currency-list-button-container {
+  padding-top: 8px;
+  padding-left: 10px;
   display: flex;
-  gap: 10px; /* Adjust the spacing as needed */
+  gap: 16px;
 }
 
 .currency-list-favorite-button {
@@ -43,15 +66,18 @@
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .currency-list-favorite-button.favorited {
-  background-color: #f76c6c;
+  background-color: #cf4d4d;
   color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .currency-list-favorite-button:hover {
   background-color: #f0a4a4;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .view-details-button {
@@ -62,10 +88,12 @@
   cursor: pointer;
   border-radius: 4px;
   font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .view-details-button:hover {
   background-color: #0056b3;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .error-message {
@@ -75,10 +103,10 @@
   width: 100%;
 }
 
-.currency-list-item.positive .currency-header {
-  background-color: #85bb65; /* Positive change color */
+.currency-list-item.positive .currency-list-header {
+  background-color: #85bb65;
 }
 
-.currency-list-item.negative .currency-header {
-  background-color: #f76c6c; /* Negative change color */
+.currency-list-item.negative .currency-list-header {
+  background-color: #f76c6c;
 }

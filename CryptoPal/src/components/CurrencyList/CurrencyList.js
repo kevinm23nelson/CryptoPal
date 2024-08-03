@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { getCurrencies } from '../../api/apiCalls';
+import { getCurrencies } from '../../utils/api/apiCalls';
+import arrowUp from '../../images/elevator-arrow-up.webp';
 import './CurrencyList.css';
 
 const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
@@ -56,24 +57,26 @@ const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
         filteredCurrencies.map((currency) => (
           <div
             key={currency.id}
-            className={`currency-list-item ${
-              parseFloat(currency.changePercent24Hr) >= 0 ? 'positive' : 'negative'
-            }`}
+            className={`currency-list-item ${parseFloat(currency.changePercent24Hr) >= 0 ? 'positive' : 'negative'
+              }`}
           >
-            <div className="currency-header">
-              <p>{currency.name}</p>
-              <p>Symbol: {currency.symbol}</p>
+            <div className="currency-list-header">
+              <img
+                src={arrowUp}
+                alt="Performance arrow"
+                className={`performance-arrow ${parseFloat(currency.changePercent24Hr) < 0 ? 'flipped' : ''}`}
+              />
+              <p>{currency.name} ({currency.symbol})</p>
             </div>
             <div className="explore-currency-details">
               <p>Rank: {currency.rank}</p>
               <p>Price: {formatPrice(currency.priceUsd)}</p>
               <p>Change (24hr): {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
             </div>
-            <div className="button-container">
+            <div className="currency-list-button-container">
               <button
-                className={`currency-list-favorite-button ${
-                  favorites.find((fav) => fav.id === currency.id) ? 'favorited' : ''
-                }`}
+                className={`currency-list-favorite-button ${favorites.find((fav) => fav.id === currency.id) ? 'favorited' : ''
+                  }`}
                 onClick={() => toggleFavorite(currency)}
               >
                 {favorites.find((fav) => fav.id === currency.id) ? 'Unfavorite' : 'Favorite'}

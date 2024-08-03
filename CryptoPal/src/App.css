@@ -8,20 +8,20 @@
 
 .main-content {
   flex-grow: 1;
-  padding: 20px;
+  padding: 30px;
   margin-left: 170px;
-  overflow: auto; 
-  transition: margin-left 0.3s; 
+  overflow: auto;
+  transition: margin-left 0.3s;
 }
 
 body {
   margin: 0;
   padding: 0;
   background-image: url('./images/gradient-background.avif');
-  background-size: cover; /* Adjust size to cover the whole viewport */
-  background-position: center; /* Center the background image */
-  background-repeat: no-repeat; /* Prevent repeating the background image */
-  background-attachment: fixed; /* Optional: Fix the background image so it stays in place during scrolling */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 @media (max-width: 768px) {

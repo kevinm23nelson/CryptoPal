@@ -1,21 +1,13 @@
 .currency-card {
-    margin-top: 20px;
-    padding: 20px;
     margin-left: 48px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f962;
     overflow: hidden;
-    /* Prevent overflow issues */
-}
-
-.currency-card-header {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-    text-align: center;
 }
 
 .currency-card-body {
+    padding: 20px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -29,43 +21,44 @@
     font-weight: bold;
     display: flex;
     align-items: center;
-    position: relative;
-  }
-  
-  .performance-arrow {
-    width: 30px; /* Adjust size as needed */
+    gap: 10px;
+}
+
+.performance-arrow {
+    width: 20px;
     height: auto;
-    margin-right: 10px; /* Space between the arrow and text */
-  }
-  
-  .flipped {
-    transform: rotate(180deg); /* Flip the arrow upside down */
-  }
-  
-  .currency-item.positive .currency-header {
-    background-color: #85bb65; /* Positive change color */
-  }
-  
-  .currency-item.negative .currency-header {
-    background-color: #f76c6c; /* Negative change color */
-  }
-  
-  /* Responsive design */
-  @media (max-width: 1200px) {
-    .currency-item {
-      flex: 1 1 calc(50% - 20px); /* Adjust size on smaller screens */
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .currency-item {
-      flex: 1 1 100%; /* Full width on very small screens */
-    }
-  }
-  
+    flex-shrink: 0;
+    border-radius: 4px;
+}
+
+.currency-header p {
+    margin: 0;
+    padding: 0;
+}
+
+.flipped {
+    transform: rotate(180deg);
+}
+
+.currency-item.positive .currency-header {
+    background-color: #85bb65;
+}
+
+.currency-item.negative .currency-header {
+    background-color: #f76c6c;
+}
+
+.currency-card-details p {
+    margin: 5px;
+    padding: 1px;
+    padding-top: 2px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
 .currency-item {
     flex: 1 1 calc(33.333% - 20px);
-    /* Adjust size based on screen width */
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -93,7 +86,6 @@
     border-radius: 5px;
     font-weight: bold;
     display: flex;
-    justify-content: space-around;
 }
 
 .currency-details {
@@ -101,9 +93,13 @@
     padding: 5px 0;
 }
 
-.button-container {
+.currency-card-button-container {
+    align-content: center;
+    padding-top: 5px;
+    padding-right: 12px;
+    margin-left: 20px;
     display: flex;
-    gap: 10px;
+    gap: 4px;
 }
 
 .favorite-button {
@@ -114,6 +110,7 @@
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .favorite-button.favorited {
@@ -130,45 +127,39 @@
     border-radius: 4px;
     color: white;
     border: none;
-
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s;
     margin-left: 8px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Adding slight shadow to text */
 }
 
 .dashboard-view-details-button:hover {
     background-color: #6ca4f7;
     color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Increasing shadow on hover */
 }
 
-/* Positive and negative change colors for the header */
 .currency-item.positive .currency-header {
     background-color: #85bb65;
-    /* Positive change color */
 }
 
 .currency-item.negative .currency-header {
     background-color: #f76c6c;
-    /* Negative change color */
 }
 
-/* Responsive design */
 @media (max-width: 1200px) {
     .currency-item {
         flex: 1 1 calc(50% - 20px);
-        /* Adjust size on smaller screens */
     }
 }
 
 @media (max-width: 768px) {
     .currency-item {
         flex: 1 1 100%;
-        /* Full width on very small screens */
     }
 }
 
 .currency-details-page {
     padding: 20px;
 }
-

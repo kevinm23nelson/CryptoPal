@@ -65,7 +65,7 @@ describe('CurrencyDetailsPage from ExplorePage', () => {
   });
 
   it('From ExplorePage - View Details button redirects to that CurrencyDetailsPage and can return back to ExplorePage', () => {
-    cy.get('.explore-page-header').should('contain.text', 'TOP 100 CURRENCIES');
+    cy.get('.explore-page-header').should('contain.text', 'Top 100 Currencies');
     cy.get('.currency-list').within(() => {
       cy.contains('.currency-list-item', 'Bitcoin').should('exist');
       cy.get('.view-details-button').contains('View Details').click();

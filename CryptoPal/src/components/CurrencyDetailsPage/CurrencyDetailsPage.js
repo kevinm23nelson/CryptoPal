@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { getCurrencyById } from '../../api/apiCalls';
+import { getCurrencyById } from '../../utils/api/apiCalls';
 import './CurrencyDetailsPage.css';
 
 const CurrencyDetailsPage = () => {
@@ -41,7 +41,7 @@ const CurrencyDetailsPage = () => {
         <p className="error-message">{errorMessage}</p>
       ) : currency ? (
         <div className="currency-view-details">
-          <div className={`currency-header ${performanceClass}`}>
+          <div className={`currency-view-details-header ${performanceClass}`}>
             <p>Coin: {currency.name}</p>
             <p className="currency-symbol">Symbol: {currency.symbol}</p>
           </div>

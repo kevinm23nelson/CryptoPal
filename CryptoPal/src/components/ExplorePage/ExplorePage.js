@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import CurrencyList from '../CurrencyList/CurrencyList';
-import { loadFavorites, saveFavorites } from '../../LocalStorage';
+import { loadFavorites, saveFavorites } from '../../utils/localStorage/LocalStorage';
 import './ExplorePage.css';
 
 const ExplorePage = () => {
@@ -31,7 +31,7 @@ const ExplorePage = () => {
   return (
     <div className="explore-page">
       <header className="explore-page-header">
-        <h1>TOP 100 CURRENCIES</h1>
+        <h1>Top 100 Currencies</h1>
       </header>
       <SearchBar searchQuery={searchQuery} handleSearchChange={handleSearchChange} />
       <br />

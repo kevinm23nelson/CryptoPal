@@ -1,22 +1,22 @@
+// Dashboard.js
 import React, { useEffect, useState } from 'react';
-import { loadFavorites, saveFavorites } from '../../LocalStorage';
+import { loadFavorites, saveFavorites } from '../../utils/localStorage/LocalStorage';
 import CurrencyCard, { calculateOneYearPerformance } from '../CurrencyCard/CurrencyCard';
 import Filter from '../Filter/Filter';
-import { getCurrencyById, getHistoricalData } from '../../api/apiCalls';
+import { getCurrencyById, getHistoricalData } from '../../utils/api/apiCalls';
 import './Dashboard.css';
 
 const Dashboard = () => {
   const [favorites, setFavorites] = useState([]);
   const [filter, setFilter] = useState('rank');
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true); 
 
   const fetchFavoritesData = async () => {
     const savedFavorites = loadFavorites();
-    console.log('Loaded favorites from local storage:', savedFavorites);
 
     if (savedFavorites.length === 0) {
       setFavorites([]);
-      setLoading(false); // Set loading to false when there are no favorites
+      setLoading(false); 
       return;
     }
 
@@ -26,16 +26,14 @@ const Dashboard = () => {
           const updatedCurrency = await getCurrencyById(fav.id);
           const historicalData = await getHistoricalData(fav.id);
           const oneYearPerformance = calculateOneYearPerformance(historicalData);
-          console.log(`One year performance for ${fav.id}:`, oneYearPerformance);
           return { ...fav, ...updatedCurrency, oneYearPerformance };
         })
       );
       setFavorites(updatedFavorites);
-      setLoading(false); // Set loading to false once data is fetched
-      console.log('Updated favorites:', updatedFavorites);
+      setLoading(false); 
     } catch (error) {
       console.error('Error fetching data:', error);
-      setLoading(false); // Set loading to false even if there's an error
+      setLoading(false); 
     }
   };
 
@@ -45,7 +43,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log('Fetching data at interval');
       fetchFavoritesData();
     }, 10000);
 
@@ -56,7 +53,6 @@ const Dashboard = () => {
     const updatedFavorites = favorites.filter((fav) => fav.id !== currencyId);
     setFavorites(updatedFavorites);
     saveFavorites(updatedFavorites);
-    console.log(`Removed favorite with ID: ${currencyId}`);
   };
 
   const handleFilterChange = (filter) => {
@@ -65,7 +61,6 @@ const Dashboard = () => {
 
   const getFilteredFavorites = () => {
     const sortedFavorites = [...favorites];
-    console.log('Sorting favorites with filter:', filter);
 
     switch (filter) {
       case '24hrpositive':
@@ -83,22 +78,21 @@ const Dashboard = () => {
         break;
     }
 
-    console.log('Filtered favorites:', sortedFavorites);
     return sortedFavorites;
   };
 
   return (
     <div className="dashboard">
       <div className="dashboard-header">
-        <h1>Dashboard</h1>
+        <h1>Favorite Currencies</h1>
       </div>
       <div className="filter-container">
-        <Filter onFilterChange={handleFilterChange} />
+        <Filter onFilterChange={handleFilterChange} includeOneYear={true} />
       </div>
       <CurrencyCard 
         favorites={getFilteredFavorites()} 
         onRemoveFavorite={removeFavorite} 
-        loading={loading} // Pass loading state to CurrencyCard
+        loading={loading}
       />
     </div>
   );

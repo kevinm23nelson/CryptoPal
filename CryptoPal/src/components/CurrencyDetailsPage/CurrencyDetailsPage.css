@@ -12,19 +12,19 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 80%; /* Adjust width to be smaller */
-    max-width: 400px; /* Set a maximum width for larger screens */
+    width: 80%; 
+    max-width: 400px; 
     margin: 0 auto;
-    box-sizing: border-box; /* Ensures padding and border are included in total width */
+    box-sizing: border-box; 
     background-color: #f9f9f962;
   }
   
-  .currency-header {
+  .currency-view-details-header {
     background-color: #eee;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 20px;
-    box-sizing: border-box; /* Ensures padding and border are included in total width */
+    box-sizing: border-box; 
   }
   
   .positive-performance {
@@ -37,7 +37,7 @@
   
   .currency-header p {
     margin: 5px 0;
-    font-size: 1em; /* Adjust font size for better fit on smaller screens */
+    font-size: 1em; 
   }
   
   .currency-symbol {
@@ -45,7 +45,7 @@
   }
   
   .currency-details-body {
-    font-size: 1em; /* Adjust font size for better fit on smaller screens */
+    font-size: 1em; 
     margin: 10px 0;
   }
   
@@ -59,27 +59,26 @@
     color: white;
     transition: background-color 0.3s;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    display: inline-block; /* Ensures button does not overflow */
+    display: inline-block;
   }
   
   .return-button:hover {
     background-color: #85bb65;
   }
   
-  /* Media queries for responsiveness */
   @media (max-width: 768px) {
     .currency-view-details {
       padding: 15px;
-      width: 90%; /* Increase width percentage for tablets and small screens */
-      max-width: 350px; /* Adjust max-width for medium screens */
+      width: 90%; 
+      max-width: 350px; 
     }
   
     .currency-header, .currency-details-body {
-      font-size: 0.9em; /* Slightly smaller text on smaller screens */
+      font-size: 0.9em; 
     }
   
     .return-button {
-      padding: 8px 16px; /* Adjust button size for smaller screens */
+      padding: 8px 16px; 
     }
   }
   

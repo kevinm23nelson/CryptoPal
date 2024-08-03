@@ -1,37 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { getHistoricalData } from '../../api/apiCalls';
+import { getHistoricalData } from '../../utils/api/apiCalls';
 import './CurrencyCard.css';
-import arrowUp from '../../images/elevator-arrow-up.gif'; 
+import arrowUp from '../../images/elevator-arrow-up.webp';
 
 export const calculateOneYearPerformance = (historicalData) => {
-  console.log('Calculating one year performance for historical data:', historicalData);
-
   if (historicalData.length === 0) {
-    console.log('No historical data available.');
     return { percentageChange: 0 };
   }
 
   const oneYearAgo = new Date();
   oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-  console.log('One year ago date:', oneYearAgo);
 
-  const recentData = historicalData.filter(dataPoint => new Date(dataPoint.time) >= oneYearAgo);
-  console.log('Filtered recent data:', recentData);
+  const recentData = historicalData.filter(dataPoint => {
+    const dataDate = new Date(dataPoint.time);
+    return dataDate >= oneYearAgo;
+  });
 
   if (recentData.length < 2) {
-    console.log('Not enough data points for one year performance calculation.');
     return { percentageChange: 0 };
   }
 
   const earliestData = recentData[0];
   const latestData = recentData[recentData.length - 1];
-  console.log('Earliest data point:', earliestData);
-  console.log('Latest data point:', latestData);
 
   const percentageChange = ((latestData.priceUsd - earliestData.priceUsd) / earliestData.priceUsd) * 100;
-  console.log('Calculated percentage change:', percentageChange.toFixed(2));
 
   return { percentageChange: percentageChange.toFixed(2) };
 };
@@ -45,9 +39,14 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite, loading }) => {
       const changes = {};
 
       const historicalDataPromises = favorites.map(async (currency) => {
-        const historicalData = await getHistoricalData(currency.id);
-        const oneYearPerformance = calculateOneYearPerformance(historicalData);
-        return { id: currency.id, oneYearPerformance };
+        try {
+          const historicalData = await getHistoricalData(currency.id);
+          const oneYearPerformance = calculateOneYearPerformance(historicalData);
+          return { id: currency.id, oneYearPerformance };
+        } catch (error) {
+          console.error(`Error fetching historical data for ${currency.id}:`, error);
+          return { id: currency.id, oneYearPerformance: { percentageChange: 0 } };
+        }
       });
 
       try {
@@ -56,7 +55,6 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite, loading }) => {
           changes[id] = oneYearPerformance.percentageChange;
         });
         setOneYearChanges(changes);
-        console.log('One year changes:', changes);
       } catch (error) {
         console.error('Error fetching historical data:', error);
       }
@@ -84,9 +82,6 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite, loading }) => {
 
   return (
     <div className="currency-card">
-      <div className="currency-card-header">
-        <h2>Favorite Currencies</h2>
-      </div>
       <div className="currency-card-body">
         {loading ? (
           <p className="loading-message">Loading...</p>
@@ -94,9 +89,8 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite, loading }) => {
           favorites.map((currency) => (
             <div
               key={currency.id}
-              className={`currency-item ${
-                parseFloat(currency.changePercent24Hr) >= 0 ? 'positive' : 'negative'
-              }`}
+              className={`currency-item ${parseFloat(currency.changePercent24Hr) >= 0 ? 'positive' : 'negative'
+                }`}
             >
               <div className="currency-header">
                 <img
@@ -104,17 +98,16 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite, loading }) => {
                   alt="Performance arrow"
                   className={`performance-arrow ${parseFloat(currency.changePercent24Hr) < 0 ? 'flipped' : ''}`}
                 />
-                <p>Coin: {currency.name}</p>
-                <p className="currency-symbol">Symbol: {currency.symbol}</p>
+                <p>{currency.name} ({currency.symbol})</p>
               </div>
-              <div className="currency-details">
+              <div className="currency-card-details">
                 <p className="currency-rank">Rank: {currency.rank}</p>
                 <p className="currency-market-cap">Market Cap: {formatPrice(currency.marketCapUsd)}</p>
                 <p className="currency-price">Price: {formatPrice(currency.priceUsd)}</p>
                 <p className="currency-change">Change (24hr): {parseFloat(currency.changePercent24Hr).toFixed(2)}%</p>
                 <p className="currency-year-change">Change (1 year): {oneYearChanges[currency.id] || 'Loading...'}%</p>
               </div>
-              <div className="button-container">
+              <div className="currency-card-button-container">
                 <button
                   onClick={() => handleRemoveFavorite(currency.id)}
                   className="favorite-button"
@@ -143,7 +136,7 @@ CurrencyCard.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      rank: PropTypes.number.isRequired,
+      rank: PropTypes.string.isRequired,
       symbol: PropTypes.string.isRequired,
       priceUsd: PropTypes.string.isRequired,
       changePercent24Hr: PropTypes.string.isRequired,

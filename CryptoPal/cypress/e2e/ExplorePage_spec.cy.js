@@ -6,14 +6,14 @@ describe('ExplorePage', () => {
   });
 
   it('displays the explore page correctly', () => {
-    cy.get('.explore-page-header').should('contain.text', 'TOP 100 CURRENCIES');
+    cy.get('.explore-page-header').should('contain.text', 'Top 100 Currencies');
     cy.get('.search-bar').should('exist');
 
     // Check that each currency item is displayed and has required buttons
     cy.get('.currency-list').within(() => {
       // Bitcoin
       cy.contains('.currency-list-item', 'Bitcoin').should('exist');
-      cy.contains('.currency-list-item', 'Symbol: BTC').should('exist');
+      cy.contains('.currency-list-item', 'BTC').should('exist');
       cy.contains('.currency-list-item', 'Rank: 1').should('exist');
       cy.contains('.currency-list-item', 'Price: $6,929.82').should('exist');
       cy.contains('.currency-list-item', 'Change (24hr): -0.81%').should('exist');
@@ -22,7 +22,7 @@ describe('ExplorePage', () => {
 
       // Ethereum
       cy.contains('.currency-list-item', 'Ethereum').should('exist');
-      cy.contains('.currency-list-item', 'Symbol: ETH').should('exist');
+      cy.contains('.currency-list-item', 'ETH').should('exist');
       cy.contains('.currency-list-item', 'Rank: 2').should('exist');
       cy.contains('.currency-list-item', 'Price: $404.98').should('exist');
       cy.contains('.currency-list-item', 'Change (24hr): -0.10%').should('exist');
@@ -31,7 +31,7 @@ describe('ExplorePage', () => {
 
       // Bibox Token
       cy.contains('.currency-list-item', 'Bibox Token').should('exist');
-      cy.contains('.currency-list-item', 'Symbol: BIX').should('exist');
+      cy.contains('.currency-list-item', 'BIX').should('exist');
       cy.contains('.currency-list-item', 'Rank: 100').should('exist');
       cy.contains('.currency-list-item', 'Price: $0.70').should('exist');
       cy.contains('.currency-list-item', 'Change (24hr): -3.03%').should('exist');
@@ -40,7 +40,7 @@ describe('ExplorePage', () => {
 
       // TRON
       cy.contains('.currency-list-item', 'TRON').should('exist');
-      cy.contains('.currency-list-item', 'Symbol: TRX').should('exist');
+      cy.contains('.currency-list-item', 'TRX').should('exist');
       cy.contains('.currency-list-item', 'Rank: 10').should('exist');
       cy.contains('.currency-list-item', 'Price: $117.05').should('exist');
       cy.contains('.currency-list-item', 'Change (24hr): 5.04%').should('exist');
@@ -49,21 +49,59 @@ describe('ExplorePage', () => {
     });
   });
 
-  it('should toggle Favorite and Unfavorite buttons correctly', () => {
+  it('should toggle Favorite and Unfavorite buttons correctly and correctly add and remove from local storage', () => {
     cy.get('.currency-list').within(() => {
       cy.contains('.currency-list-item', 'TRON')
-        .find('.currency-list-favorite-button') 
-        .should('contain.text', 'Favorite') 
-        .click(); 
-        
+        .find('.currency-list-favorite-button')
+        .should('contain.text', 'Favorite')
+        .click();
+
       cy.contains('.currency-list-item', 'TRON')
         .find('.currency-list-favorite-button')
-        .should('contain.text', 'Unfavorite')
+        .should('contain.text', 'Unfavorite');
+
+      // cy.window().then((win) => {
+      //   const favoriteCurrencies = JSON.parse(win.localStorage.getItem('favoriteCurrencies'));
+      //   expect(favoriteCurrencies).to.deep.include({
+      //     id: 'tron',
+      //     rank: '10',
+      //     symbol: 'TRX',
+      //     name: 'TRON',
+      //     supply: '102339166.0000000000000000',
+      //     maxSupply: null,
+      //     marketCapUsd: '72116102.5394724649666992',
+      //     volumeUsd24Hr: '45084130.4166935808283857',
+      //     priceUsd: '117.046774500729512',
+      //     changePercent24Hr: '5.0331628584946192',
+      //     vwap24Hr: '0.7207903092174193'
+      //   });
+      // });
+
+  
+      cy.contains('.currency-list-item', 'TRON')
+        .find('.currency-list-favorite-button')
         .click();
 
       cy.contains('.currency-list-item', 'TRON')
         .find('.currency-list-favorite-button')
         .should('contain.text', 'Favorite');
+
+      cy.window().then((win) => {
+        const favoriteCurrencies = JSON.parse(win.localStorage.getItem('favoriteCurrencies'));
+        expect(favoriteCurrencies).to.not.deep.include({
+          id: 'tron',
+          rank: '10',
+          symbol: 'TRX',
+          name: 'TRON',
+          supply: '102339166.0000000000000000',
+          maxSupply: null,
+          marketCapUsd: '72116102.5394724649666992',
+          volumeUsd24Hr: '45084130.4166935808283857',
+          priceUsd: '117.046774500729512',
+          changePercent24Hr: '5.0331628584946192',
+          vwap24Hr: '0.7207903092174193'
+        });
+      });
     });
   });
 

@@ -1,6 +1,7 @@
+// Filter.js
 import React from 'react';
 
-const Filter = ({ onFilterChange }) => {
+const Filter = ({ onFilterChange, includeOneYear }) => {
   return (
     <div className="filter">
       <label htmlFor="filter">Filter By: </label>
@@ -8,12 +9,10 @@ const Filter = ({ onFilterChange }) => {
         <option value="rank">Default (Rank/MarketCap)</option>
         <option value="24hrpositive">Change Up (24hr +)</option>
         <option value="24hrnegative">Change Down (24hr -)</option>
-        <option value="1year">Change (1 Year)</option>
+        {includeOneYear && <option value="1year">Change (1 Year)</option>}
       </select>
     </div>
   );
 }
 
 export default Filter;
-
-

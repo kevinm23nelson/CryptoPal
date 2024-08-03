@@ -1,5 +1,8 @@
 describe('Dashboard with Favorites', () => {
   beforeEach(() => {
+    const date = new Date('2024-07-30T00:00:00.000Z');
+    cy.clock(date.getTime());
+    
     cy.setupCurrencyIntercepts();
     const favoriteCurrencies = [
       {
@@ -62,7 +65,7 @@ describe('Dashboard with Favorites', () => {
   it('should correctly display Bitcoin card details', () => {
     cy.contains('.currency-card', 'Bitcoin').within(() => {
       cy.get('.currency-rank').should('contain.text', 'Rank: 1');
-      cy.get('.currency-symbol').should('contain.text', 'Symbol: BTC');
+      cy.get('.currency-header').should('contain.text', 'BTC');
       cy.get('.currency-price').should('contain.text', 'Price: $6,931.51');
       cy.get('.currency-change').should('contain.text', 'Change (24hr): -0.81%');
       cy.get('.currency-market-cap').should('contain.text', 'Market Cap: $119,179,791,817.67');
@@ -73,7 +76,7 @@ describe('Dashboard with Favorites', () => {
   it('should correctly display TRON card details', () => {
     cy.contains('.currency-card', 'TRON').within(() => {
       cy.get('.currency-rank').should('contain.text', 'Rank: 10');
-      cy.get('.currency-symbol').should('contain.text', 'Symbol: TRX');
+      cy.get('.currency-header').should('contain.text', 'TRX');
       cy.get('.currency-price').should('contain.text', 'Price: $117.05');
       cy.get('.currency-change').should('contain.text', 'Change (24hr): 5.03%');
       cy.get('.currency-market-cap').should('contain.text', 'Market Cap: $72,116,102.54');
@@ -84,7 +87,7 @@ describe('Dashboard with Favorites', () => {
   it('should correctly display Ethereum card details', () => {
     cy.contains('.currency-card', 'Ethereum').within(() => {
       cy.get('.currency-rank').should('contain.text', 'Rank: 2');
-      cy.get('.currency-symbol').should('contain.text', 'Symbol: ETH');
+      cy.get('.currency-header').should('contain.text', 'ETH');
       cy.get('.currency-price').should('contain.text', 'Price: $404.98');
       cy.get('.currency-change').should('contain.text', 'Change (24hr): -0.10%');
       cy.get('.currency-market-cap').should('contain.text', 'Market Cap: $40,967,739,219.66');
@@ -95,7 +98,7 @@ describe('Dashboard with Favorites', () => {
   it('should correctly display Bibox Token card details', () => {
     cy.contains('.currency-card', 'Bibox Token').within(() => {
       cy.get('.currency-rank').should('contain.text', 'Rank: 100');
-      cy.get('.currency-symbol').should('contain.text', 'Symbol: BIX');
+      cy.get('.currency-header').should('contain.text', 'BIX');
       cy.get('.currency-price').should('contain.text', 'Price: $0.70');
       cy.get('.currency-change').should('contain.text', 'Change (24hr): -3.03%');
       cy.get('.currency-market-cap').should('contain.text', 'Market Cap: $72,116,102.54');
