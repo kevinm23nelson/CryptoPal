@@ -1,5 +1,5 @@
 # CryptoPal
-CryptoPal is a web application that allows users to explore and track the top 100 cryptocurrencies. Users can view detailed information about each currency, favorite/unfavorite currencies, and filter currencies based on various criteria.
+CryptoPal is a web application that allows users to explore, track, and create mock purchases from the top 100 cryptocurrencies. CryptoPal is intended for younger users who are interested in the cryptocurrency market and want to practice investing before they use their real money; you can safely practice investing with CryptoPal! Users can view detailed information about each currency, favorite/unfavorite currencies, and filter currencies based on various criteria.
 
 ## Features
 - Display a list of the top 100 cryptocurrencies with details like name, symbol, rank, price, and 24-hour change.
