@@ -4,6 +4,7 @@ CryptoPal is a web application designed to help users explore and simulate inves
 #
 [r2h]: crypto-pal-rs14-igammdd7i-kevin-nelsons-projects.vercel.app
 [r2hc]: crypto-pal-rs14-igammdd7i-kevin-nelsons-projects.vercel.app
+[a relative link](crypto-pal-rs14-pfy15coab-kevin-nelsons-projects.vercel.app)
 
 ## Features
 - Display a list of the top 100 cryptocurrencies with details like name, symbol, rank, price, and 24-hour change.
