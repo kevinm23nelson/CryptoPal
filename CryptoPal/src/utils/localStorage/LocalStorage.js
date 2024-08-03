@@ -1,4 +1,3 @@
-// localStorage.js
 export const loadFavorites = () => {
   const savedFavorites = localStorage.getItem('favoriteCurrencies');
   return savedFavorites ? JSON.parse(savedFavorites) : [];

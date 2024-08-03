@@ -37,6 +37,13 @@ const AssetsPage = () => {
         return acc;
       }, []);
 
+      // Sort assets based on their current value
+      groupedAssets.sort((a, b) => {
+        const aCurrentValue = a.quantity * (pricesMap[a.id] || 0);
+        const bCurrentValue = b.quantity * (pricesMap[b.id] || 0);
+        return bCurrentValue - aCurrentValue;
+      });
+
       setAssets(groupedAssets);
     };
 
@@ -70,23 +77,30 @@ const AssetsPage = () => {
   const calculateTotalPerformance = () => {
     const totalInvestment = calculateTotalInvestment();
     const totalAssetValue = calculateTotalAssetValue();
+
+    if (totalInvestment === 0) return 0; // Avoid division by zero
+
     const performance = ((totalAssetValue - totalInvestment) / totalInvestment) * 100;
     return performance.toFixed(2);
   };
-
-  const totalInvestment = calculateTotalInvestment().toFixed(2);
-  const totalAssetValue = calculateTotalAssetValue().toFixed(2);
-  const totalPerformance = calculateTotalPerformance();
 
   return (
     <div className="assets-page">
       <h1 className="assets-page-header">My Assets</h1>
       <div className="total-portfolio-performance">
         <h2>Total Portfolio Performance</h2>
-        <p>Total Investment: ${totalInvestment}</p>
-        <p>Total Asset Value: ${totalAssetValue}</p>
-        <p>Performance: {totalPerformance}%</p>
+        <p>Total Investment: ${calculateTotalInvestment().toFixed(2)}</p>
+        <p>Total Asset Value: ${calculateTotalAssetValue().toFixed(2)}</p>
+        <p>
+          Total Gain/Loss:{" "}
+          <span style={{ color: calculateTotalPerformance() >= 0 ? "green" : "red" }}>
+            {calculateTotalPerformance() >= 0 ? "+" : "-"}${Math.abs(calculateTotalPerformance())}
+          </span>
+        </p>
       </div>
+      <h1 className="assets-page-description">
+        Coins you own. Ranked by current value.
+      </h1>
       {assets.length === 0 ? (
         <p>No assets purchased yet.</p>
       ) : (
