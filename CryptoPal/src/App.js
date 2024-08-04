@@ -8,7 +8,7 @@ import SideBar from './components/SideBar/SideBar';
 import TradePage from './components/TradePage/TradePage';
 import AssetsPage from './components/AssetsPage/AssetsPage';
 import AssetsPastTransactions from './components/AssetsPage/AssetsPastTransactions';
-import NotFoundPage from './components/NotFoundPage/NotFoundPage'; // Import the NotFoundPage component
+import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 
 function App() {
   return (
