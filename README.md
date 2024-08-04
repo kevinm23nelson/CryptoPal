@@ -10,6 +10,8 @@ CryptoPal is a web application designed to help users explore and simulate inves
 - Favorite/unfavorite cryptocurrencies with state persisted in local storage.
 - Dynamic styling based on the 24-hour change percentage (positive or negative).
 - Responsive design to ensure usability across different devices and screen sizes.
+- Practice mock "purchases" of cryptocurrencies and observe their performance in real time.
+- Made some bad investments and want to start over? With CryptoPal you can reset your trades at any time and start over!
 
 ## Technologies Used
 - React
