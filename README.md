@@ -47,7 +47,9 @@ Successfully integrated Cypress for end-to-end testing, enhancing the reliabilit
 Efficiently implemented the favorite/unfavorite feature with local storage, providing a seamless user experience.
 Developed a responsive design that works well across various devices, ensuring accessibility for all users.
 ## Future Feature
-A future feature that I would love to implement would be for the application to properly handle the selling of currencies and to be able to factor the impact of that sale (currencies price that day compared to the prices of past transactions where you bought that currency) and be able to factor sales into the total portfolio performance.
+- A future feature that I would love to implement would be for the application to properly handle the selling of currencies and to be able to factor the impact of that sale (currencies price that day compared to the prices of past transactions where you bought that currency) and be able to factor sales into the total portfolio performance.
+- Another feature I would love to implement would be more APIs to fetch in even more data about each currency, such as images of their token, information about the company behind the currency, specific news about that currency, etc.
+- This is a project that I intended to be able to grow and scale over time and become more complex as more features are added to it. This will continue to be a major showcase project of mine to enhance my work portfolio.
 
 ## Screenshots:
 Multiple Screen Sizes
