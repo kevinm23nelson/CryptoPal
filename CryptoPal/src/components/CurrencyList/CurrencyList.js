@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { getCurrencies } from '../../utils/api/apiCalls';
 import arrowUp from '../../images/elevator-arrow-up.webp';
+import icons from '../../images/icons';
 import './CurrencyList.css';
 
 const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
@@ -57,8 +58,7 @@ const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
         filteredCurrencies.map((currency) => (
           <div
             key={currency.id}
-            className={`currency-list-item ${parseFloat(currency.changePercent24Hr) >= 0 ? 'positive' : 'negative'
-              }`}
+            className={`currency-list-item ${parseFloat(currency.changePercent24Hr) >= 0 ? 'positive' : 'negative'}`}
           >
             <div className="currency-list-header">
               <img
@@ -67,6 +67,11 @@ const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
                 className={`performance-arrow ${parseFloat(currency.changePercent24Hr) < 0 ? 'flipped' : ''}`}
               />
               <p>{currency.name} ({currency.symbol})</p>
+              <img
+                  src={icons[currency.symbol.toLowerCase()]}
+                  alt={`${currency.symbol} icon`}
+                  className="currency-icon"
+                />
             </div>
             <div className="explore-currency-details">
               <p>Rank: {currency.rank}</p>
@@ -75,8 +80,7 @@ const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
             </div>
             <div className="currency-list-button-container">
               <button
-                className={`currency-list-favorite-button ${favorites.find((fav) => fav.id === currency.id) ? 'favorited' : ''
-                  }`}
+                className={`currency-list-favorite-button ${favorites.find((fav) => fav.id === currency.id) ? 'favorited' : ''}`}
                 onClick={() => toggleFavorite(currency)}
               >
                 {favorites.find((fav) => fav.id === currency.id) ? 'Unfavorite' : 'Favorite'}
