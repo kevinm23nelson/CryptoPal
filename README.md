@@ -1,5 +1,8 @@
 # CryptoPal
-CryptoPal is a web application that allows users to explore, track, and create mock purchases from the top 100 cryptocurrencies. CryptoPal is intended for younger users who are interested in the cryptocurrency market and want to practice investing before they use their real money; you can safely practice investing with CryptoPal! Users can view detailed information about each currency, favorite/unfavorite currencies, and filter currencies based on various criteria.
+CryptoPal is a web application designed to help users explore and simulate investments in the top 100 cryptocurrencies. Tailored for individuals who want to gain hands-on experience with cryptocurrency trading without financial risk, CryptoPal offers a safe environment for practicing investing. Users can view detailed information on each cryptocurrency, manage their favorites, and utilize various filters to find currencies that meet their criteria. With CryptoPal, you can confidently learn and practice cryptocurrency investing before committing real money.
+
+## Deployed Application Here
+[Deployed CryptoPal](https://crypto-pal-five.vercel.app/)
 
 ## Features
 - Display a list of the top 100 cryptocurrencies with details like name, symbol, rank, price, and 24-hour change.
@@ -7,6 +10,8 @@ CryptoPal is a web application that allows users to explore, track, and create m
 - Favorite/unfavorite cryptocurrencies with state persisted in local storage.
 - Dynamic styling based on the 24-hour change percentage (positive or negative).
 - Responsive design to ensure usability across different devices and screen sizes.
+- Practice mock "purchases" of cryptocurrencies and observe their performance in real time.
+- Made some bad investments and want to start over? With CryptoPal you can reset your trades at any time and start over!
 
 ## Technologies Used
 - React
@@ -44,7 +49,9 @@ Successfully integrated Cypress for end-to-end testing, enhancing the reliabilit
 Efficiently implemented the favorite/unfavorite feature with local storage, providing a seamless user experience.
 Developed a responsive design that works well across various devices, ensuring accessibility for all users.
 ## Future Feature
-A future feature that I would love to implement would be for the application to properly handle the selling of currencies and to be able to factor the impact of that sale (currencies price that day compared to the prices of past transactions where you bought that currency) and be able to factor sales into the total portfolio performance.
+- A future feature that I would love to implement would be for the application to properly handle the selling of currencies and to be able to factor the impact of that sale (currencies price that day compared to the price when it was bought) and be able to factor sales into the total portfolio performance.
+- Another feature I would love to implement would be more APIs to fetch in even more data about each currency, such as images of their token, information about the company behind the currency, specific news about that currency, etc.
+- This is a project that I intended to be able to grow and scale over time and become more complex as more features are added to it. This will continue to be a major showcase project of mine to enhance my work portfolio.
 
 ## Screenshots:
 Multiple Screen Sizes
@@ -70,4 +77,7 @@ Multiple Screen Sizes
 
 <img width="1333" alt="Screenshot 2024-08-03 at 4 48 10 PM" src="https://github.com/user-attachments/assets/fe493d1f-0ef4-46d5-9641-0c35d09d73cc">
 
-
+## Acknowledgements
+- [Turing](https://turing.edu/) for education.
+- [React.dev](https://react.dev/) for React documentation.
+- [Cypress Docs](https://docs.cypress.io/) for Cypress training and documentation.

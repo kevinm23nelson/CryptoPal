@@ -1,12 +1,11 @@
 Cypress.Commands.add('setupCurrencyIntercepts', () => {
-    // Intercept the request to get all currencies
     cy.intercept('GET', 'https://api.coincap.io/v2/assets', {
         statusCode: 200,
         fixture: 'CurrencyList.json'
     }).as('getCurrencies');
 
+
     
-    // Intercept requests for individual currency by ID
     cy.intercept('GET', 'https://api.coincap.io/v2/assets/bitcoin', {
         statusCode: 200,
         fixture: 'bitcoin.json'
@@ -28,7 +27,7 @@ Cypress.Commands.add('setupCurrencyIntercepts', () => {
     }).as('getCurrencyById');
 
 
-    //Intercept for Individual History
+    
     cy.intercept('GET', 'https://api.coincap.io/v2/assets/bitcoin/history?interval=d1', {
         statusCode: 200,
         fixture: 'history-bitcoin.json'
