@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { getHistoricalData } from '../../utils/api/apiCalls';
 import './CurrencyCard.css';
 import arrowUp from '../../images/elevator-arrow-up.webp';
+import icons from '../../images/icons'; // Import the icons object
 
 export const calculateOneYearPerformance = (historicalData) => {
   if (historicalData.length === 0) {
@@ -89,8 +90,7 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite, loading }) => {
           favorites.map((currency) => (
             <div
               key={currency.id}
-              className={`currency-item ${parseFloat(currency.changePercent24Hr) >= 0 ? 'positive' : 'negative'
-                }`}
+              className={`currency-item ${parseFloat(currency.changePercent24Hr) >= 0 ? 'positive' : 'negative'}`}
             >
               <div className="currency-header">
                 <img
@@ -99,6 +99,11 @@ const CurrencyCard = ({ favorites = [], onRemoveFavorite, loading }) => {
                   className={`performance-arrow ${parseFloat(currency.changePercent24Hr) < 0 ? 'flipped' : ''}`}
                 />
                 <p>{currency.name} ({currency.symbol})</p>
+                <img
+                  src={icons[currency.symbol.toLowerCase()]}
+                  alt={`${currency.symbol} icon`}
+                  className="currency-icon"
+                />
               </div>
               <div className="currency-card-details">
                 <p className="currency-rank">Rank: {currency.rank}</p>
@@ -144,7 +149,7 @@ CurrencyCard.propTypes = {
     })
   ).isRequired,
   onRemoveFavorite: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired, // PropType for loading
+  loading: PropTypes.bool.isRequired,
 };
 
 export default CurrencyCard;
