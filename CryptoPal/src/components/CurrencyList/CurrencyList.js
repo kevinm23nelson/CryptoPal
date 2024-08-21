@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { getCurrencies } from '../../utils/api/apiCalls';
 import arrowUp from '../../images/elevator-arrow-up.webp';
 import icons from '../../images/icons';
+import { getIconForCurrency } from '../../utils/utils'; // Import the utility function
 import './CurrencyList.css';
 
 const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
@@ -68,10 +69,10 @@ const CurrencyList = ({ searchQuery, favorites, toggleFavorite }) => {
               />
               <p>{currency.name} ({currency.symbol})</p>
               <img
-                  src={icons[currency.symbol.toLowerCase()]}
-                  alt={`${currency.symbol} icon`}
-                  className="currency-icon"
-                />
+                src={getIconForCurrency(currency.symbol, icons)} // Use the utility function
+                alt={`${currency.symbol} icon`}
+                className="currency-icon"
+              />
             </div>
             <div className="explore-currency-details">
               <p>Rank: {currency.rank}</p>

@@ -1,6 +1,5 @@
 describe('ExplorePage', () => {
   beforeEach(() => {
-    // Set up intercepts with fixture data
     cy.setupCurrencyIntercepts();
     cy.visit('http://localhost:3000/explore');
   });

@@ -1,5 +1,5 @@
 const icons = {
-    btc: require('./btc.png'),
+    'btc': require('./btc.png'),
     eth: require('./eth.png'),
     usdt: require('./usdt.png'),
     bnb: require('./bnb.png'),
@@ -153,6 +153,20 @@ const icons = {
     ray: require('./ray.png'),
     dexe: require('./dexe.png'),
     fei: require('./fei.png'),
+    ftt: require('./ftt.png'),
+    pendle: require('./pendle.png'),
+    cake: require('./cake.png'),
+    twt: require('./twt.png'),
+    lpt: require('./lpt.png'),
+    '1inch': require('./1inch.png'),
+    wemix: require('./wemix.png'),
+    glm: require('./glm.png'),
+    jst: require('./jst.png'),
+    sc: require('./sc.png'),
+    nxm: require('./nxm.png'),
+    celo: require('./celo.png'),
+    super: require('./super.png'),
+    amp: require('./amp.png')
 };
 
 export default icons;
